@@ -11,12 +11,38 @@ import UIKit
 class CategoriesVC: UIViewController {
     
     let nextButton = UIButton()
+    private let categories = CategoryData.getCategoreis() // Model
+    let categoriesTableView = UITableView() // TableView
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
+        setupViewHierachy()
         setupNextButton()
-        view.backgroundColor = UIColor(named: "Background")
+        setupCategoreisTableView()
+        
+    }
+    
+    // Setup view hierachy in correct order
+    private func setupViewHierachy() {
+        view.addSubview(categoriesTableView) // Table view must be first to make large title shrink when scrolling
+        view.addSubview(nextButton)
+    }
+    
+    //MARK: Table View
+    func setupCategoreisTableView() {
+        categoriesTableView.backgroundColor = UIColor(named: "Background")
+        
+        setCategoriesTableViewConstraints()
+    }
+    
+    func setCategoriesTableViewConstraints(){
+        categoriesTableView.translatesAutoresizingMaskIntoConstraints = false // Enables AutoLayout
+        categoriesTableView.topAnchor.constraint(equalTo:view.topAnchor).isActive = true
+        categoriesTableView.leftAnchor.constraint(equalTo:view.leftAnchor).isActive = true
+        categoriesTableView.rightAnchor.constraint(equalTo:view.rightAnchor).isActive = true
+        categoriesTableView.bottomAnchor.constraint(equalTo:nextButton.topAnchor).isActive = true
     }
     
     //MARK: Next Button
@@ -28,7 +54,6 @@ class CategoriesVC: UIViewController {
         
         nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
         
-        view.addSubview(nextButton)
         setNextButtonConstraints()
     }
     
@@ -42,9 +67,9 @@ class CategoriesVC: UIViewController {
     // Constraints
     func setNextButtonConstraints() {
         nextButton.translatesAutoresizingMaskIntoConstraints = false // Enables AutoLayout
-        nextButton.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        nextButton.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        nextButton.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        nextButton.leadingAnchor.constraint(equalTo:view.leadingAnchor).isActive = true
+        nextButton.trailingAnchor.constraint(equalTo:view.trailingAnchor).isActive = true
+        nextButton.bottomAnchor.constraint(equalTo:view.bottomAnchor).isActive = true
         nextButton.heightAnchor.constraint(equalToConstant: 72).isActive = true
     }
 
@@ -56,8 +81,9 @@ class CategoriesVC: UIViewController {
         self.navigationController?.navigationBar.prefersLargeTitles = true
         
         // Search Controller
-        let searchController = UISearchController(searchResultsController: nil)
-        navigationItem.searchController = searchController
+//        let searchController = UISearchController(searchResultsController: nil)
+//        navigationItem.searchController = searchController
+//        navigationItem.hidesSearchBarWhenScrolling = true
         
         // Buttons
         let settingsButton = UIBarButtonItem(image: UIImage(named: "Settings"), style: .plain, target: self, action: #selector(settingsButtonTapped))
