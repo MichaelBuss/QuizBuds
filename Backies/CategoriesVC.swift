@@ -11,7 +11,7 @@ import UIKit
 class CategoriesVC: UIViewController {
     
     let nextButton = UIButton()
-    private let categories = CategoryData.getCategoreis() // Model
+    private let categories = CategoryData.getCategories() // Model
     let categoriesTableView = UITableView() // TableView
     
 
@@ -20,7 +20,7 @@ class CategoriesVC: UIViewController {
         setupNavigationBar()
         setupViewHierachy()
         setupNextButton()
-        setupCategoreisTableView()
+        setupCategoriesTableView()
         
     }
     
@@ -31,7 +31,7 @@ class CategoriesVC: UIViewController {
     }
     
     //MARK: Table View
-    func setupCategoreisTableView() {
+    func setupCategoriesTableView() {
         categoriesTableView.backgroundColor = UIColor(named: "Background")
         
         setCategoriesTableViewConstraints()
@@ -48,9 +48,17 @@ class CategoriesVC: UIViewController {
     //MARK: Next Button
     // Properties
     func setupNextButton() {
+        let label = "Start"
+        let font = UIFont.systemFont(ofSize: 30)
+        let attributes: [NSAttributedString.Key: Any] = [
+            .font: font,
+            .foregroundColor: view.tintColor,
+            ]
+        let attributedLabel = NSAttributedString(string: label, attributes: attributes)
+        
         nextButton.backgroundColor = .white
         nextButton.setTitleColor(.black, for: .normal)
-        nextButton.setTitle("Start", for: .normal)
+        nextButton.setAttributedTitle(attributedLabel, for: .normal)
         
         nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
         
@@ -77,7 +85,7 @@ class CategoriesVC: UIViewController {
     func setupNavigationBar() {
         
         // Title
-        self.title = "Categoreis"
+        self.title = "Categories"
         self.navigationController?.navigationBar.prefersLargeTitles = true
         
         // Search Controller

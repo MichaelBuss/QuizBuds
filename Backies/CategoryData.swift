@@ -9,7 +9,7 @@
 import Foundation
 
 class CategoryData {
-    static func getCategoreis() -> [Category]{
+    static func getCategories() -> [Category]{
         let categories = [
             Category(name: "Random", isActive: true),
             Category(name: "Sex", isActive: true),
