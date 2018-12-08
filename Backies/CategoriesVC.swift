@@ -10,16 +10,18 @@ import UIKit
 
 class CategoriesVC: UIViewController {
     
-    let nextButton = UIButton()
+    
     private let categories = CategoryData.getCategories() // Model
     let categoriesTableView = UITableView() // TableView
+    let bottomAreaVC = BottomAreaVC()
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = UIColor(named: "Background")
         setupNavigationBar()
         setupViewHierachy()
-        setupNextButton()
+        setupBottomArea()
         setupCategoriesTableView()
         
     }
@@ -27,13 +29,12 @@ class CategoriesVC: UIViewController {
     // Setup view hierachy in correct order
     private func setupViewHierachy() {
         view.addSubview(categoriesTableView) // Table view must be first to make large title shrink when scrolling
-        view.addSubview(nextButton)
+        add(bottomAreaVC) // Adds bottomAreaVC as a child. The add(child:) method is an extention on UIViewController
     }
     
     //MARK: Table View
     func setupCategoriesTableView() {
-        categoriesTableView.backgroundColor = UIColor(named: "Background")
-        
+        categoriesTableView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0) //Clear
         setCategoriesTableViewConstraints()
     }
     
@@ -42,43 +43,22 @@ class CategoriesVC: UIViewController {
         categoriesTableView.topAnchor.constraint(equalTo:view.topAnchor).isActive = true
         categoriesTableView.leftAnchor.constraint(equalTo:view.leftAnchor).isActive = true
         categoriesTableView.rightAnchor.constraint(equalTo:view.rightAnchor).isActive = true
-        categoriesTableView.bottomAnchor.constraint(equalTo:nextButton.topAnchor).isActive = true
+        categoriesTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
     
-    //MARK: Next Button
-    // Properties
-    func setupNextButton() {
-        let label = "Start"
-        let font = UIFont.systemFont(ofSize: 30)
-        let attributes: [NSAttributedString.Key: Any] = [
-            .font: font,
-            .foregroundColor: view.tintColor,
-            ]
-        let attributedLabel = NSAttributedString(string: label, attributes: attributes)
-        
-        nextButton.backgroundColor = .white
-        nextButton.setTitleColor(.black, for: .normal)
-        nextButton.setAttributedTitle(attributedLabel, for: .normal)
-        
-        nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
-        
-        setNextButtonConstraints()
+    
+    //MARK: - Bottom Area
+    func setupBottomArea() {
+        bottomAreaVC.view.backgroundColor = .blue
+        setupBottomAreaViewConstraints()
     }
     
-    // Action
-    @objc func nextButtonTapped() {
-        let nextVC = QuizVC()
-        nextVC.title = "Quiz 🎉"
-        navigationController?.pushViewController(nextVC, animated: true)
-    }
-    
-    // Constraints
-    func setNextButtonConstraints() {
-        nextButton.translatesAutoresizingMaskIntoConstraints = false // Enables AutoLayout
-        nextButton.leadingAnchor.constraint(equalTo:view.leadingAnchor).isActive = true
-        nextButton.trailingAnchor.constraint(equalTo:view.trailingAnchor).isActive = true
-        nextButton.bottomAnchor.constraint(equalTo:view.bottomAnchor).isActive = true
-        nextButton.heightAnchor.constraint(equalToConstant: 72).isActive = true
+    func setupBottomAreaViewConstraints() {
+        bottomAreaVC.view.translatesAutoresizingMaskIntoConstraints = false // Enables AutoLayout
+        bottomAreaVC.view.leadingAnchor.constraint(equalTo:view.leadingAnchor).isActive = true
+        bottomAreaVC.view.trailingAnchor.constraint(equalTo:view.trailingAnchor).isActive = true
+        bottomAreaVC.view.bottomAnchor.constraint(equalTo:view.bottomAnchor).isActive = true
+        bottomAreaVC.view.heightAnchor.constraint(equalToConstant: 72).isActive = true
     }
 
     //MARK: Setup Navigation Bar
@@ -106,5 +86,22 @@ class CategoriesVC: UIViewController {
     
     @objc func editButtonTapped() {
         print("Edit Tapped")
+    }
+}
+
+extension UIViewController {
+    // Convinience method for adding child view controllers
+    func add(_ child: UIViewController) {
+        addChild(child)
+        view.addSubview(child.view)
+        child.didMove(toParent: self)
+    }
+    
+    // Convinience method for removing child view controllers
+    func remove() {
+        guard parent != nil else { return }
+        willMove(toParent: nil)
+        removeFromParent()
+        view.removeFromSuperview()
     }
 }
