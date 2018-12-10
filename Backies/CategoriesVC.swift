@@ -49,7 +49,7 @@ class CategoriesVC: UIViewController {
     
     //MARK: - Bottom Area
     func setupBottomArea() {
-        bottomAreaVC.view.backgroundColor = .blue
+//        bottomAreaVC.view.backgroundColor = .blue
         setupBottomAreaViewConstraints()
     }
     
