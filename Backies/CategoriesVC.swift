@@ -8,11 +8,12 @@
 
 import UIKit
 
-class CategoriesVC: UIViewController {
+class CategoriesVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     
     private let categories = CategoryData.getCategories() // Model
     let categoriesTableView = UITableView() // TableView
+    let categoryCellID = "categoryCellId"
     
 
     override func viewDidLoad() {
@@ -21,7 +22,6 @@ class CategoriesVC: UIViewController {
         setupNavigationBar()
         setupViewHierachy()
         setupCategoriesTableView()
-        
     }
     
     // Setup view hierachy in correct order
@@ -31,16 +31,29 @@ class CategoriesVC: UIViewController {
     
     //MARK: Table View
     func setupCategoriesTableView() {
-        categoriesTableView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0) //Clear
-        setCategoriesTableViewConstraints()
-    }
-    
-    func setCategoriesTableViewConstraints(){
+        categoriesTableView.register(CategoryCell.self, forCellReuseIdentifier: categoryCellID)
+        categoriesTableView.delegate = self
+        categoriesTableView.dataSource = self
+        categoriesTableView.backgroundColor = .clear
+
         categoriesTableView.translatesAutoresizingMaskIntoConstraints = false // Enables AutoLayout
         categoriesTableView.topAnchor.constraint(equalTo:view.topAnchor).isActive = true
         categoriesTableView.leftAnchor.constraint(equalTo:view.leftAnchor).isActive = true
         categoriesTableView.rightAnchor.constraint(equalTo:view.rightAnchor).isActive = true
         categoriesTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return categories.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell : CategoryCell = CategoryCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: categoryCellID, category: categories[indexPath.row])
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 90
     }
     
     //MARK: Setup Navigation Bar
@@ -50,11 +63,6 @@ class CategoriesVC: UIViewController {
         self.title = "Categories"
         self.navigationController?.navigationBar.prefersLargeTitles = true
         
-        // Search Controller
-//        let searchController = UISearchController(searchResultsController: nil)
-//        navigationItem.searchController = searchController
-//        navigationItem.hidesSearchBarWhenScrolling = true
-        
         // Buttons
         let settingsButton = UIBarButtonItem(image: UIImage(named: "Settings"), style: .plain, target: self, action: #selector(settingsButtonTapped))
         let editButton = UIBarButtonItem(image: UIImage(named: "Edit"), style: .plain, target: self, action: #selector(editButtonTapped))
@@ -62,7 +70,7 @@ class CategoriesVC: UIViewController {
         let playButton = UIBarButtonItem(image: UIImage(named: "Play"), style: .plain, target: self, action: #selector(playButtonTapped))
 
         navigationItem.leftBarButtonItems = [settingsButton, editButton]
-        navigationItem.rightBarButtonItems = [helpButton, playButton]
+        navigationItem.rightBarButtonItems = [playButton, helpButton]
     }
     
     @objc func settingsButtonTapped() {
@@ -84,21 +92,4 @@ class CategoriesVC: UIViewController {
         print("Help Tapped")
     }
     
-}
-
-extension UIViewController {
-    // Convinience method for adding child view controllers
-    func add(_ child: UIViewController) {
-        addChild(child)
-        view.addSubview(child.view)
-        child.didMove(toParent: self)
-    }
-    
-    // Convinience method for removing child view controllers
-    func remove() {
-        guard parent != nil else { return }
-        willMove(toParent: nil)
-        removeFromParent()
-        view.removeFromSuperview()
-    }
 }

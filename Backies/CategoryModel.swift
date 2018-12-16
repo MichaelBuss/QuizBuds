@@ -6,9 +6,10 @@
 //  Copyright © 2018 NoobLabs. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 struct Category {
     let name: String?
-    let isActive:Bool?
+    let isActive: Bool?
+    let color: [UIColor?]
 }
