@@ -13,7 +13,6 @@ class CategoriesVC: UIViewController {
     
     private let categories = CategoryData.getCategories() // Model
     let categoriesTableView = UITableView() // TableView
-    let bottomAreaVC = BottomAreaVC()
     
 
     override func viewDidLoad() {
@@ -21,7 +20,6 @@ class CategoriesVC: UIViewController {
         view.backgroundColor = UIColor(named: "Background")
         setupNavigationBar()
         setupViewHierachy()
-        setupBottomArea()
         setupCategoriesTableView()
         
     }
@@ -29,7 +27,6 @@ class CategoriesVC: UIViewController {
     // Setup view hierachy in correct order
     private func setupViewHierachy() {
         view.addSubview(categoriesTableView) // Table view must be first to make large title shrink when scrolling
-        add(bottomAreaVC) // Adds bottomAreaVC as a child. The add(child:) method is an extention on UIViewController
     }
     
     //MARK: Table View
@@ -46,21 +43,6 @@ class CategoriesVC: UIViewController {
         categoriesTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
     
-    
-    //MARK: - Bottom Area
-    func setupBottomArea() {
-//        bottomAreaVC.view.backgroundColor = .blue
-        setupBottomAreaViewConstraints()
-    }
-    
-    func setupBottomAreaViewConstraints() {
-        bottomAreaVC.view.translatesAutoresizingMaskIntoConstraints = false // Enables AutoLayout
-        bottomAreaVC.view.leadingAnchor.constraint(equalTo:view.leadingAnchor).isActive = true
-        bottomAreaVC.view.trailingAnchor.constraint(equalTo:view.trailingAnchor).isActive = true
-        bottomAreaVC.view.bottomAnchor.constraint(equalTo:view.bottomAnchor).isActive = true
-        bottomAreaVC.view.heightAnchor.constraint(equalToConstant: 72).isActive = true
-    }
-
     //MARK: Setup Navigation Bar
     func setupNavigationBar() {
         
@@ -75,9 +57,12 @@ class CategoriesVC: UIViewController {
         
         // Buttons
         let settingsButton = UIBarButtonItem(image: UIImage(named: "Settings"), style: .plain, target: self, action: #selector(settingsButtonTapped))
-        let editButton = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editButtonTapped))
-        navigationItem.leftBarButtonItem = settingsButton
-        navigationItem.rightBarButtonItem = editButton
+        let editButton = UIBarButtonItem(image: UIImage(named: "Edit"), style: .plain, target: self, action: #selector(editButtonTapped))
+        let helpButton = UIBarButtonItem(image: UIImage(named: "Help"), style: .plain, target: self, action: #selector(helpButtonTapped))
+        let playButton = UIBarButtonItem(image: UIImage(named: "Play"), style: .plain, target: self, action: #selector(playButtonTapped))
+
+        navigationItem.leftBarButtonItems = [settingsButton, editButton]
+        navigationItem.rightBarButtonItems = [helpButton, playButton]
     }
     
     @objc func settingsButtonTapped() {
@@ -87,6 +72,18 @@ class CategoriesVC: UIViewController {
     @objc func editButtonTapped() {
         print("Edit Tapped")
     }
+    
+    @objc func playButtonTapped() {
+        print("Play Tapped")
+        let nextVC = QuizVC()
+        nextVC.title = "Quiz 🎉"
+        navigationController?.pushViewController(nextVC, animated: true)
+    }
+    
+    @objc func helpButtonTapped() {
+        print("Help Tapped")
+    }
+    
 }
 
 extension UIViewController {
