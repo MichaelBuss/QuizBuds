@@ -32,7 +32,9 @@ class CategoryCell: UITableViewCell {
     }
     
     override func layoutSubviews() {
-        self.backgroundColor = .clear
+//        self.backgroundColor = .clear
+//        self.layer.cornerRadius = 20
+//        self.layer.masksToBounds = true
         setupCellView()
         setupCellLabel()
         self.contentView.addSubview(cellView)
@@ -61,18 +63,19 @@ class CategoryCell: UITableViewCell {
         let roundPath = UIBezierPath(roundedRect: bounds, cornerRadius: cellPadding)
         let maskLayer = CAShapeLayer()
         maskLayer.path = roundPath.cgPath
-        cellView.layer.mask = maskLayer
+        self.layer.mask = maskLayer
+        self.layer.masksToBounds = true
         
-        cellView.backgroundColor = category.color.first ?? #colorLiteral(red: 0.8754016757, green: 0, blue: 0.8273025155, alpha: 1)
-        // second color here
+        self.backgroundColor = category.color.first ?? #colorLiteral(red: 0.8754016757, green: 0, blue: 0.8273025155, alpha: 1)
+        // second gradient color here
         
-        translatesAutoresizingMaskIntoConstraints = false
-        cellView.frame = CGRect(
-            x: cellPadding,
-            y: cellPadding * 0.5,
-            width: self.contentView.frame.width-cellPadding*2,
-            height: self.contentView.frame.height-cellPadding
-        )
+//        translatesAutoresizingMaskIntoConstraints = false
+//        self.frame = CGRect(
+//            x: cellPadding,
+//            y: cellPadding * 0.5,
+//            width: self.contentView.frame.width-cellPadding*2,
+//            height: self.contentView.frame.height-cellPadding
+//        )
     
     }
     
