@@ -37,9 +37,6 @@ class CategoryCell: UITableViewCell {
         setupCellLabel()
         self.contentView.addSubview(cellView)
         self.contentView.addSubview(cellLabel)
-        
-        
-        
     }
     
     func setupCellLabel() {
@@ -72,7 +69,7 @@ class CategoryCell: UITableViewCell {
         translatesAutoresizingMaskIntoConstraints = false
         cellView.frame = CGRect(
             x: cellPadding,
-            y: cellPadding,
+            y: cellPadding * 0.5,
             width: self.contentView.frame.width-cellPadding*2,
             height: self.contentView.frame.height-cellPadding
         )

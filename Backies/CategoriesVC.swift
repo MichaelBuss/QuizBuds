@@ -35,6 +35,7 @@ class CategoriesVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         categoriesTableView.delegate = self
         categoriesTableView.dataSource = self
         categoriesTableView.backgroundColor = .clear
+//        categoriesTableView.contentInset.top = CategoryCell.cellPadding * 0.5
 
         categoriesTableView.translatesAutoresizingMaskIntoConstraints = false // Enables AutoLayout
         categoriesTableView.topAnchor.constraint(equalTo:view.topAnchor).isActive = true
