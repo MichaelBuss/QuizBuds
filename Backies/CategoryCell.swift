@@ -32,9 +32,8 @@ class CategoryCell: UITableViewCell {
     }
     
     override func layoutSubviews() {
-//        self.backgroundColor = .clear
-//        self.layer.cornerRadius = 20
-//        self.layer.masksToBounds = true
+        super.layoutSubviews()
+        self.backgroundColor = .clear
         setupCellView()
         setupCellLabel()
         self.contentView.addSubview(cellView)
@@ -58,12 +57,10 @@ class CategoryCell: UITableViewCell {
     
     func setupCellView() {
         let cellPadding: CGFloat = 16
+        let cellCornerRadius = cellPadding //Same as padding to look good
         
         // Smoothly rounded corners
-        let roundPath = UIBezierPath(roundedRect: bounds, cornerRadius: cellPadding)
-        let maskLayer = CAShapeLayer()
-        maskLayer.path = roundPath.cgPath
-        self.layer.mask = maskLayer
+        self.layer.mask = cornerRadiusSmoothMask(radius: cellCornerRadius)
         self.layer.masksToBounds = true
         
         self.backgroundColor = category.color.first ?? #colorLiteral(red: 0.8754016757, green: 0, blue: 0.8273025155, alpha: 1)
@@ -81,3 +78,5 @@ class CategoryCell: UITableViewCell {
     
     
 }
+
+

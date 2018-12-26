@@ -24,3 +24,12 @@ extension UIViewController {
         view.removeFromSuperview()
     }
 }
+
+extension UIView {
+    func cornerRadiusSmoothMask(radius: CGFloat) -> CAShapeLayer {
+        let roundPath = UIBezierPath(roundedRect: bounds, cornerRadius: radius)
+        let maskLayer = CAShapeLayer()
+        maskLayer.path = roundPath.cgPath
+        return maskLayer
+    }
+}
