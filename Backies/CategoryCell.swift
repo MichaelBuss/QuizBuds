@@ -2,13 +2,15 @@
 //  CategoryCell.swift
 //  Backies
 //
-//  Created by Michael Buss Andersen on 16/12/2018.
+//  Created by Michael Buss Andersen on 26/12/2018.
 //  Copyright © 2018 NoobLabs. All rights reserved.
 //
 
 import UIKit
 
-class CategoryCell: UITableViewCell {
+class CategoryCell: UICollectionViewCell {
+    
+    static let identifier = "categoryCellId"
     
     var category: Category!
     
@@ -22,14 +24,10 @@ class CategoryCell: UITableViewCell {
         return label
     }()
     
-    init(style: UITableViewCell.CellStyle, reuseIdentifier: String?, category: Category) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        self.category = category
+    override init(frame: CGRect) {
+        super.init(frame: frame)
     }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+
     
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -52,7 +50,7 @@ class CategoryCell: UITableViewCell {
             width: self.contentView.frame.width,
             height: self.contentView.frame.height
         )
-
+        
     }
     
     func setupCellView() {
@@ -65,18 +63,13 @@ class CategoryCell: UITableViewCell {
         
         self.backgroundColor = category.color.first ?? #colorLiteral(red: 0.8754016757, green: 0, blue: 0.8273025155, alpha: 1)
         // second gradient color here
-        
-//        translatesAutoresizingMaskIntoConstraints = false
-//        self.frame = CGRect(
-//            x: cellPadding,
-//            y: cellPadding * 0.5,
-//            width: self.contentView.frame.width-cellPadding*2,
-//            height: self.contentView.frame.height-cellPadding
-//        )
-    
     }
     
+    func populate(withCategory category: Category){
+        self.category = category
+    }
     
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }
-
-

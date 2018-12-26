@@ -7,18 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4C37EE9D21D4063E0073F4B8 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C37EE9C21D4063E0073F4B8 /* CategoryCell.swift */; };
+		4C37EE9F21D429C60073F4B8 /* ColumnFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C37EE9E21D429C60073F4B8 /* ColumnFlowLayout.swift */; };
 		4C3BD63B21B5C5010038ECB2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3BD63A21B5C5010038ECB2 /* AppDelegate.swift */; };
 		4C3BD64221B5C5030038ECB2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C3BD64121B5C5030038ECB2 /* Assets.xcassets */; };
 		4C3BD64521B5C5030038ECB2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C3BD64321B5C5030038ECB2 /* LaunchScreen.storyboard */; };
 		4C3BD64E21B5C95A0038ECB2 /* CategoriesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3BD64D21B5C95A0038ECB2 /* CategoriesVC.swift */; };
 		4C3BD65021B5D0E90038ECB2 /* QuizVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3BD64F21B5D0E90038ECB2 /* QuizVC.swift */; };
 		4C3E318321C6CCA60034D9F8 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3E318221C6CCA60034D9F8 /* Extensions.swift */; };
-		4C3E318521C6CF0B0034D9F8 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3E318421C6CF0B0034D9F8 /* CategoryCell.swift */; };
 		4C71D87B21B803FA00673E01 /* CategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C71D87A21B803FA00673E01 /* CategoryModel.swift */; };
 		4C71D87D21B804D500673E01 /* CategoryData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C71D87C21B804D500673E01 /* CategoryData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4C37EE9C21D4063E0073F4B8 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
+		4C37EE9E21D429C60073F4B8 /* ColumnFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColumnFlowLayout.swift; sourceTree = "<group>"; };
 		4C3BD63721B5C5010038ECB2 /* Backies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Backies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C3BD63A21B5C5010038ECB2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4C3BD64121B5C5030038ECB2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -27,7 +30,6 @@
 		4C3BD64D21B5C95A0038ECB2 /* CategoriesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesVC.swift; sourceTree = "<group>"; };
 		4C3BD64F21B5D0E90038ECB2 /* QuizVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizVC.swift; sourceTree = "<group>"; };
 		4C3E318221C6CCA60034D9F8 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		4C3E318421C6CF0B0034D9F8 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		4C71D87A21B803FA00673E01 /* CategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModel.swift; sourceTree = "<group>"; };
 		4C71D87C21B804D500673E01 /* CategoryData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -63,7 +65,8 @@
 			isa = PBXGroup;
 			children = (
 				4C3BD64D21B5C95A0038ECB2 /* CategoriesVC.swift */,
-				4C3E318421C6CF0B0034D9F8 /* CategoryCell.swift */,
+				4C37EE9E21D429C60073F4B8 /* ColumnFlowLayout.swift */,
+				4C37EE9C21D4063E0073F4B8 /* CategoryCell.swift */,
 				4C71D87A21B803FA00673E01 /* CategoryModel.swift */,
 				4C71D87C21B804D500673E01 /* CategoryData.swift */,
 				4C3BD64F21B5D0E90038ECB2 /* QuizVC.swift */,
@@ -155,11 +158,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				4C71D87D21B804D500673E01 /* CategoryData.swift in Sources */,
+				4C37EE9F21D429C60073F4B8 /* ColumnFlowLayout.swift in Sources */,
 				4C3E318321C6CCA60034D9F8 /* Extensions.swift in Sources */,
 				4C3BD64E21B5C95A0038ECB2 /* CategoriesVC.swift in Sources */,
-				4C3E318521C6CF0B0034D9F8 /* CategoryCell.swift in Sources */,
 				4C3BD65021B5D0E90038ECB2 /* QuizVC.swift in Sources */,
 				4C3BD63B21B5C5010038ECB2 /* AppDelegate.swift in Sources */,
+				4C37EE9D21D4063E0073F4B8 /* CategoryCell.swift in Sources */,
 				4C71D87B21B803FA00673E01 /* CategoryModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

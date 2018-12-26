@@ -8,54 +8,45 @@
 
 import UIKit
 
-class CategoriesVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    
-    
+class CategoriesVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     private let categories = CategoryData.getCategories() // Model
-    let categoriesTableView = UITableView() // TableView
-    let categoryCellID = "categoryCellId"
-    
+    private var categoriesCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout.init()) // CollectionView
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(named: "Background")
         setupNavigationBar()
-        setupViewHierachy()
-        setupCategoriesTableView()
-    }
-    
-    // Setup view hierachy in correct order
-    private func setupViewHierachy() {
-        view.addSubview(categoriesTableView) // Table view must be first to make large title shrink when scrolling
+        setupCategoriesCollectionView()
     }
     
     //MARK: Table View
-    func setupCategoriesTableView() {
-        categoriesTableView.register(CategoryCell.self, forCellReuseIdentifier: categoryCellID)
-        categoriesTableView.delegate = self
-        categoriesTableView.dataSource = self
-        categoriesTableView.backgroundColor = .clear
-//        categoriesTableView.contentInset.top = CategoryCell.cellPadding * 0.5
+    func setupCategoriesCollectionView() {
+        let flowLayout = ColumnFlowLayout()
+        categoriesCollectionView = UICollectionView(frame: view.bounds, collectionViewLayout: flowLayout) // CollectionView
+        flowLayout.scrollDirection = UICollectionView.ScrollDirection.vertical
+        categoriesCollectionView.setCollectionViewLayout(flowLayout, animated: true)
+        categoriesCollectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        categoriesCollectionView.backgroundColor = .clear
+        categoriesCollectionView.alwaysBounceVertical = true
+        view.addSubview(categoriesCollectionView)
+        
+        categoriesCollectionView.register(CategoryCell.self, forCellWithReuseIdentifier: CategoryCell.identifier)
+        
+        categoriesCollectionView.delegate = self
+        categoriesCollectionView.dataSource = self
 
-        categoriesTableView.translatesAutoresizingMaskIntoConstraints = false // Enables AutoLayout
-        categoriesTableView.topAnchor.constraint(equalTo:view.topAnchor).isActive = true
-        categoriesTableView.leftAnchor.constraint(equalTo:view.leftAnchor).isActive = true
-        categoriesTableView.rightAnchor.constraint(equalTo:view.rightAnchor).isActive = true
-        categoriesTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return categories.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell : CategoryCell = CategoryCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: categoryCellID, category: categories[indexPath.row])
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCell.identifier, for: indexPath) as! CategoryCell
+        cell.populate(withCategory: categories[indexPath.row])
         return cell
     }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 90
-    }
+
     
     //MARK: Setup Navigation Bar
     func setupNavigationBar() {
