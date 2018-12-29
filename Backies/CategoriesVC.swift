@@ -84,4 +84,8 @@ class CategoriesVC: UIViewController, UICollectionViewDelegate, UICollectionView
         print("Help Tapped")
     }
     
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        categoriesCollectionView.collectionViewLayout.invalidateLayout()
+    }
+    
 }

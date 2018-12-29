@@ -8,16 +8,22 @@
 
 import UIKit
 
+
+//let data = try decoder.decode(<#T##type: Decodable.Protocol##Decodable.Protocol#>, from: <#T##Data#>)
+
 class CategoryData {
     static func getCategories() -> [Category]{
-        let categories = [
-            Category(name: "Random", isActive: true, color: [UIColor(named: "GradientOrangeA")]),
-            Category(name: "Sex", isActive: true, color: [UIColor(named: "GradientOrangeA")]),
-            Category(name: "Manners", isActive: true, color: [UIColor(named: "GradientOrangeA")]),
-            Category(name: "At work", isActive: false, color: [UIColor(named: "GradientOrangeA")]),
-            Category(name: "Family", isActive: false, color: [UIColor(named: "GradientOrangeA")]),
-            Category(name: "Friends", isActive: true, color: [UIColor(named: "GradientOrangeA")])
-        ]
-        return categories
+        
+        guard let path = Bundle.main.path(forResource: "data", ofType: "json") else {return []}
+        do {
+            let jsonString = try String(contentsOfFile: path)
+            let data = jsonString.data(using: .utf8)!
+            let decoder = JSONDecoder()
+            let categories = try decoder.decode([Category].self, from: data)
+            return categories
+        } catch _ as NSError {
+            return []
+        }
+
     }
 }

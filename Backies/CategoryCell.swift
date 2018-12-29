@@ -14,15 +14,9 @@ class CategoryCell: UICollectionViewCell {
     
     var category: Category!
     
-    var cellView : UIView = {
-        let view = UIView()
-        return view
-    }()
-    
-    var cellLabel : UILabel = {
-        let label = UILabel()
-        return label
-    }()
+    let cellView = UIView()
+    let cellLabel = UILabel()
+    let cellSwitch = UISwitch()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -32,25 +26,33 @@ class CategoryCell: UICollectionViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         self.backgroundColor = .clear
-        setupCellView()
-        setupCellLabel()
+        
         self.contentView.addSubview(cellView)
+        self.contentView.addSubview(cellSwitch)
         self.contentView.addSubview(cellLabel)
+        
+        setupCellView()
+        setupCellSwitch()
+        setupCellLabel()
+    }
+    
+    func setupCellSwitch() {
+        cellSwitch.translatesAutoresizingMaskIntoConstraints = false
+        cellSwitch.isOn = category.isActive!
+        cellSwitch.leftAnchor.constraint(equalTo: self.contentView.leftAnchor, constant: 16).isActive = true
+        cellSwitch.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor).isActive = true
     }
     
     func setupCellLabel() {
         cellLabel.text = category.name ?? "Name not found"
-        cellLabel.font = UIFont.boldSystemFont(ofSize: 20)
-        cellLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        cellLabel.font = UIFont.boldSystemFont(ofSize: 50)
+        cellLabel.textColor = UIColor(named: "Category Label Color") ?? #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         
-        translatesAutoresizingMaskIntoConstraints = false
-        cellLabel.frame = CGRect(
-            x: 0,
-            y: 0,
-            width: self.contentView.frame.width,
-            height: self.contentView.frame.height
-        )
-        
+        cellLabel.translatesAutoresizingMaskIntoConstraints = false
+        cellLabel.clipsToBounds = true
+        cellLabel.leftAnchor.constraint(equalTo: cellSwitch.rightAnchor, constant: 16).isActive = true
+        cellLabel.rightAnchor.constraint(equalTo: self.contentView.rightAnchor, constant: 16).isActive = true
+        cellLabel.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor).isActive = true
     }
     
     func setupCellView() {
@@ -61,8 +63,13 @@ class CategoryCell: UICollectionViewCell {
         self.layer.mask = cornerRadiusSmoothMask(radius: cellCornerRadius)
         self.layer.masksToBounds = true
         
-        self.backgroundColor = category.color.first ?? #colorLiteral(red: 0.8754016757, green: 0, blue: 0.8273025155, alpha: 1)
-        // second gradient color here
+        // Gradient layer
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = self.bounds
+        gradientLayer.startPoint = CGPoint(x:0, y:0)
+        gradientLayer.endPoint = CGPoint(x:1, y:0)
+        gradientLayer.colors = [category.gradient.color1?.cgColor ?? #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), category.gradient.color2?.cgColor ?? #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)]
+        self.layer.insertSublayer(gradientLayer, at: 0)
     }
     
     func populate(withCategory category: Category){

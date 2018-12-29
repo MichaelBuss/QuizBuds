@@ -12,7 +12,7 @@ class ColumnFlowLayout: UICollectionViewFlowLayout {
     
     override func prepare(){
         super.prepare()
-        
+//        self.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         guard let cv = collectionView else { return }
         
         let avaibleWidth = cv.bounds.inset(by: cv.layoutMargins).size.width
@@ -26,5 +26,7 @@ class ColumnFlowLayout: UICollectionViewFlowLayout {
         self.sectionInset = UIEdgeInsets(top: self.minimumInteritemSpacing, left: 0.0, bottom: 0.0, right: 0.0)
         self.sectionInsetReference = .fromSafeArea
     }
+    
+    
 
 }
