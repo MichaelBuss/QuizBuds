@@ -66,22 +66,23 @@ class CategoriesVC: UIViewController, UICollectionViewDelegate, UICollectionView
     }
     
     @objc func settingsButtonTapped() {
-        print("Settings Tapped")
+        print("Settings Button Tapped")
     }
     
     @objc func editButtonTapped() {
-        print("Edit Tapped")
+        print("Edit Button Tapped")
     }
     
     @objc func playButtonTapped() {
-        print("Play Tapped")
+        print("Play Button Tapped")
         let nextVC = QuizVC()
         nextVC.title = "Quiz 🎉"
+        nextVC.selectedCategories = categories //Needs be narrowed by selection. Corruntly not
         navigationController?.pushViewController(nextVC, animated: true)
     }
     
     @objc func helpButtonTapped() {
-        print("Help Tapped")
+        print("Help Button Tapped")
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {

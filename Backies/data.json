@@ -1,6 +1,6 @@
 [
     {
-        "name": "Random",
+        "name": "Silly",
         "isActive": true,
         "gradient": {
             "color1": "FCE38A",
@@ -16,7 +16,7 @@
         }
     },
     {
-        "name": "Manners",
+        "name": "As children",
         "isActive": true,
         "gradient": {
             "color1": "17EAD9",
@@ -45,6 +45,38 @@
         "gradient": {
             "color1": "42E695",
             "color2": "3BB2B8",
+        }
+    },
+    {
+        "name": "Alternative",
+        "isActive": true,
+        "gradient": {
+            "color1": "F02FC2",
+            "color2": "6094EA",
+        }
+    },
+    {
+        "name": "Music",
+        "isActive": true,
+        "gradient": {
+            "color1": "65799B",
+            "color2": "5E2563",
+        }
+    },
+    {
+        "name": "Dark",
+        "isActive": true,
+        "gradient": {
+            "color1": "184E68",
+            "color2": "57CA85",
+        }
+    },
+    {
+        "name": "Jeppes anus",
+        "isActive": true,
+        "gradient": {
+            "color1": "5B247A",
+            "color2": "1BCEDF",
         }
     }
 ]
