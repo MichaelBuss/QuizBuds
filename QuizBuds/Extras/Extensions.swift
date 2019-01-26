@@ -1,6 +1,6 @@
 //
 //  Extensions.swift
-//  Backies
+//  QuizBuds
 //
 //  Created by Michael Buss Andersen on 16/12/2018.
 //  Copyright © 2018 NoobLabs. All rights reserved.

@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:Backies.xcodeproj">
+      location = "self:/Users/michael/Developer/Backies/QuizBuds.xcodeproj">
    </FileRef>
 </Workspace>
