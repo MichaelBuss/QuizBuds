@@ -24,7 +24,7 @@ class QuizVC: UIViewController {
     
     
     func setupQuestionLabel(){
-        questionLabel.text = selectedCategories[0].name
+        questionLabel.text = selectedCategories.first?.name ?? "No questions found"
     
         view.addSubview(questionLabel)
         

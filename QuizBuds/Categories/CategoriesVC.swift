@@ -77,7 +77,14 @@ class CategoriesVC: UIViewController, UICollectionViewDelegate, UICollectionView
         print("Play Button Tapped")
         let nextVC = QuizVC()
         nextVC.title = "Quiz 🎉"
-        nextVC.selectedCategories = categories //Needs be narrowed by selection. Corruntly not
+        
+        // Goes through categories and checks if they are active. If so, appends to nextVC's selectedCategories
+        for category in categories {
+            print("category is \(String(describing: category.isActive))")
+            if category.isActive == true {
+                nextVC.selectedCategories.append(category)
+            }
+        }
         navigationController?.pushViewController(nextVC, animated: true)
     }
     
