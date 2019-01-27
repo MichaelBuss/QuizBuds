@@ -43,6 +43,12 @@ class CategoryCell: UICollectionViewCell {
         cellSwitch.isOn = category.isActive!
         cellSwitch.leftAnchor.constraint(equalTo: self.contentView.leftAnchor, constant: cellPadding).isActive = true
         cellSwitch.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor).isActive = true
+        cellSwitch.addTarget(self, action: #selector(switchAction), for: .valueChanged)
+    }
+    
+    @objc func switchAction(sender: UISwitch!){
+        print("Value of switch changed, now switch is \(sender.isOn)")
+        category.isActive = sender.isOn
     }
     
     func setupCellLabel() {

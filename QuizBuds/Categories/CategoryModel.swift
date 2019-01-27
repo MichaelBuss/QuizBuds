@@ -10,7 +10,10 @@ import UIKit
 
 struct Category {
     var name: String?
-    var isActive: Bool?
+    var isActive: Bool? {
+        set { UserDefaults.standard.set(newValue, forKey: name!) }
+        get { return UserDefaults.standard.object(forKey: name!) as? Bool }
+    }
     var gradient: Gradient
 }
 
@@ -29,6 +32,7 @@ extension Category: Decodable {
         
         let storedIsActive = UserDefaults.standard.object(forKey: name!) as! Bool?
         let decoded = try container.decode(Bool.self, forKey: .isActive)
+        
         isActive = storedIsActive ?? decoded
     }
 }
