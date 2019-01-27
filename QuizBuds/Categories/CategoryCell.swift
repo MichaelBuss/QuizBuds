@@ -80,10 +80,9 @@ class CategoryCell: UICollectionViewCell {
         let shadowLayer = cornerRadiusSmoothMask(radius: cellCornerRadius)
         
         shadowLayer.shadowColor = UIColor.black.cgColor
-        shadowLayer.shadowOpacity = 1
-        shadowLayer.shadowOffset = CGSize.zero
-        shadowLayer.shadowRadius = 10
-        shadowLayer.shadowPath = UIBezierPath(rect: self.bounds).cgPath
+        shadowLayer.shadowOpacity = 0.4
+        shadowLayer.shadowOffset = CGSize.init(width: 0, height: 1) //Offsets shadow one point in y direction
+        shadowLayer.shadowRadius = 4
         
         shadowLayer.insertSublayer(gradientLayer, at: 0)
         
