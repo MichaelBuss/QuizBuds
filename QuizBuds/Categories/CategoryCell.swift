@@ -66,25 +66,28 @@ class CategoryCell: UICollectionViewCell {
     
     func setupCellView() {
         // Smoothly rounded corners
-        self.layer.mask = cornerRadiusSmoothMask(radius: cellCornerRadius)
-    
-        self.layer.masksToBounds = true
-        
-        //self.layer.shadowColor = UIColor.black.cgColor
-        //self.layer.shadowOpacity = 1
-        //self.layer.shadowOffset = CGSize.zero
-        //self.layer.shadowRadius = 10
-        //self.layer.shadowPath = UIBezierPath(rect: self.bounds).cgPath
-        
         
         // Gradient layer
         let gradientLayer = CAGradientLayer()
+        
+        gradientLayer.mask = cornerRadiusSmoothMask(radius: cellCornerRadius)
         gradientLayer.frame = self.bounds
         gradientLayer.startPoint = CGPoint(x:0, y:0)
         gradientLayer.endPoint = CGPoint(x:1, y:0)
         gradientLayer.colors = [category.gradient.color1?.cgColor ?? #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), category.gradient.color2?.cgColor ?? #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)]
-
-        self.layer.insertSublayer(gradientLayer, at: 0)
+        
+        // Shadow layer
+        let shadowLayer = cornerRadiusSmoothMask(radius: cellCornerRadius)
+        
+        shadowLayer.shadowColor = UIColor.black.cgColor
+        shadowLayer.shadowOpacity = 1
+        shadowLayer.shadowOffset = CGSize.zero
+        shadowLayer.shadowRadius = 10
+        shadowLayer.shadowPath = UIBezierPath(rect: self.bounds).cgPath
+        
+        shadowLayer.insertSublayer(gradientLayer, at: 0)
+        
+        self.layer.insertSublayer(shadowLayer, at: 0)
     }
     
     func populate(withCategory category: Category){
