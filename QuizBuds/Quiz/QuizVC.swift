@@ -48,7 +48,11 @@ class QuizVC: UIViewController {
     }
     
     func updateQuestionLabel(){
-        questionLabel.text = selectedCategories[currentQuestionIndex].name
+        if !selectedCategories.isEmpty{
+            questionLabel.text = selectedCategories[currentQuestionIndex].name
+        } else {
+            questionLabel.text = "No more questions here"
+        }
     }
     
     //MARK: Setup Navigation Bar
