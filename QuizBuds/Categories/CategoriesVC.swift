@@ -9,7 +9,7 @@
 import UIKit
 
 class CategoriesVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
-    private let categories = CategoryData.getCategories() // Model
+    private let categories = CategoryData.getCategories()
     private var categoriesCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout.init()) // CollectionView
 
     override func viewDidLoad() {
@@ -17,6 +17,21 @@ class CategoriesVC: UIViewController, UICollectionViewDelegate, UICollectionView
         view.backgroundColor = UIColor(named: "Background")
         setupNavigationBar()
         setupCategoriesCollectionView()
+        registerSettingsBundle()
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.defaultsChanged),
+            name: UserDefaults.didChangeNotification,
+            object: nil)
+        
+    }
+    
+    @objc func defaultsChanged(){
+        if UserDefaults.standard.bool(forKey: SettingsBundleHelper.SettingsBundleKeys.darkAppearance){
+            print("Change to Dark Apperance")
+        } else {
+            print("Change to Light Apperance")
+        }
     }
     
     //MARK: Table View

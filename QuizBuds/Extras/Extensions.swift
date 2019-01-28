@@ -23,6 +23,13 @@ extension UIViewController {
         removeFromParent()
         view.removeFromSuperview()
     }
+    
+    // Convinience method for registereing the settings bundle
+    func registerSettingsBundle() {
+        let appDefaults = [String:AnyObject]()
+        UserDefaults.standard.register(defaults: appDefaults)
+    }
+    
 }
 
 extension UIView {

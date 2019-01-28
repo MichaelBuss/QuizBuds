@@ -8,7 +8,9 @@
 
 import UIKit
 
-class QuizVC: UIViewController {
+class QuizVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    private var quizCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout.init()) // CollectionView
     
     var selectedCategories: [Category] = []
     let questionLabel = UILabel()
@@ -16,10 +18,11 @@ class QuizVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .red
+        view.backgroundColor = UIColor(named: "Background")
         selectedCategories.shuffle()
         setupNavigationBar()
-        setupQuestionLabel()
+        setupQuizCollectionView()
+        //setupQuestionLabel()
     }
     
     
@@ -77,10 +80,37 @@ class QuizVC: UIViewController {
         updateQuestionLabel()
     }
     
+    //MARK: Collection View
+    func setupQuizCollectionView() {
+        let flowLayout = QuizFlowLayout()
+        quizCollectionView = UICollectionView(frame: view.bounds, collectionViewLayout: flowLayout) // CollectionView
+        flowLayout.scrollDirection = UICollectionView.ScrollDirection.vertical
+        quizCollectionView.setCollectionViewLayout(flowLayout, animated: true)
+        quizCollectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        quizCollectionView.backgroundColor = .clear
+        quizCollectionView.alwaysBounceVertical = true
+        view.addSubview(quizCollectionView)
+        
+        quizCollectionView.register(QuizCell.self, forCellWithReuseIdentifier: QuizCell.identifier)
+        
+        quizCollectionView.delegate = self
+        quizCollectionView.dataSource = self
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return selectedCategories.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: QuizCell.identifier, for: indexPath) as! QuizCell
+        cell.populate(withCategory: selectedCategories[indexPath.row])
+        return cell
+    }
 }
+
 
 enum direction {
     case increment
     case decrement
 }
-
