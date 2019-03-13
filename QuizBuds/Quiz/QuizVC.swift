@@ -88,7 +88,6 @@ class QuizVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         quizCollectionView.setCollectionViewLayout(flowLayout, animated: true)
         quizCollectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         quizCollectionView.backgroundColor = .clear
-        quizCollectionView.alwaysBounceVertical = true
         view.addSubview(quizCollectionView)
         
         quizCollectionView.register(QuizCell.self, forCellWithReuseIdentifier: QuizCell.identifier)

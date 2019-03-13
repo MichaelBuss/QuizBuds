@@ -42,7 +42,6 @@ class CategoriesVC: UIViewController, UICollectionViewDelegate, UICollectionView
         categoriesCollectionView.setCollectionViewLayout(flowLayout, animated: true)
         categoriesCollectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         categoriesCollectionView.backgroundColor = .clear
-        categoriesCollectionView.alwaysBounceVertical = true
         view.addSubview(categoriesCollectionView)
         
         categoriesCollectionView.register(CategoryCell.self, forCellWithReuseIdentifier: CategoryCell.identifier)
@@ -95,7 +94,7 @@ class CategoriesVC: UIViewController, UICollectionViewDelegate, UICollectionView
         
         // Goes through categories and checks if they are active. If so, appends to nextVC's selectedCategories
         for category in categories {
-            print("category is \(String(describing: category.isActive))")
+//            print("category is \(String(describing: category.isActive))")
             if category.isActive == true {
                 nextVC.selectedCategories.append(category)
             }

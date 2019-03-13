@@ -33,9 +33,9 @@ extension UIViewController {
 }
 
 extension UIView {
-    func cornerRadiusSmoothMask(radius: CGFloat) -> CAShapeLayer {
+    func cornerRadiusSmoothMask(onLayer layer: CAShapeLayer?, withRadius radius: CGFloat) -> CAShapeLayer {
         let roundPath = UIBezierPath(roundedRect: bounds, cornerRadius: radius)
-        let maskLayer = CAShapeLayer()
+        let maskLayer = layer ?? CAShapeLayer()
         maskLayer.path = roundPath.cgPath
         return maskLayer
     }

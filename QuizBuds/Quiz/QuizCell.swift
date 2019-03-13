@@ -54,14 +54,15 @@ class QuizCell: UICollectionViewCell {
         // Gradient layer
         let gradientLayer = CAGradientLayer()
         
-        gradientLayer.mask = cornerRadiusSmoothMask(radius: cellCornerRadius)
+        gradientLayer.mask = cornerRadiusSmoothMask(onLayer: gradientLayer.mask as? CAShapeLayer, withRadius: cellCornerRadius)
         gradientLayer.frame = self.bounds
         gradientLayer.startPoint = CGPoint(x:0, y:0)
         gradientLayer.endPoint = CGPoint(x:1, y:0)
         gradientLayer.colors = [category.gradient.color1?.cgColor ?? #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), category.gradient.color2?.cgColor ?? #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)]
         
         // Shadow layer
-        let shadowLayer = cornerRadiusSmoothMask(radius: cellCornerRadius)
+        var shadowLayer = CAShapeLayer()
+        shadowLayer = cornerRadiusSmoothMask(onLayer: shadowLayer, withRadius: cellCornerRadius)
         
         shadowLayer.shadowColor = UIColor.black.cgColor
         shadowLayer.shadowOpacity = 0.4
