@@ -36,6 +36,7 @@ class QuizCell: UICollectionViewCell {
     
     func setupCellLabel() {
         cellLabel.text = category.name ?? "Name not found"
+//        print(category.name!)
         cellLabel.font = UIFont.boldSystemFont(ofSize: 40)
         cellLabel.textColor = UIColor(named: "Category Label Color") ?? #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         cellLabel.textAlignment = .center

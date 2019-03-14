@@ -60,6 +60,7 @@ class CategoryCell: UICollectionViewCell {
     
     func setupCellLabel() {
         cellLabel.text = category.name ?? "Name not found"
+//        print(category.name!)
         cellLabel.font = UIFont.boldSystemFont(ofSize: 50)
         cellLabel.textColor = UIColor(named: "Category Label Color") ?? #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         //cellLabel.adjustsFontSizeToFitWidth = true //Activate to fit text in available space
