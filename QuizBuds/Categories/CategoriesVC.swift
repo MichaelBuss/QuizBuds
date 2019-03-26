@@ -15,6 +15,7 @@ class CategoriesVC: UIViewController, UICollectionViewDelegate, UICollectionView
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(named: "Background")
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Categories", style: .plain, target: nil, action: nil)
         setupNavigationBar()
         setupCategoriesCollectionView()
         registerSettingsBundle()
@@ -66,7 +67,7 @@ class CategoriesVC: UIViewController, UICollectionViewDelegate, UICollectionView
     func setupNavigationBar() {
         
         // Title
-        self.title = "Categories"
+        self.title = "Choose Categories"
         self.navigationController?.navigationBar.prefersLargeTitles = true
         
         // Buttons
@@ -104,6 +105,9 @@ class CategoriesVC: UIViewController, UICollectionViewDelegate, UICollectionView
     
     @objc func helpButtonTapped() {
         print("Help Button Tapped")
+        let nextVC = RulesVC()
+        nextVC.title = "How to play"
+        navigationController?.pushViewController(nextVC, animated: true)
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {

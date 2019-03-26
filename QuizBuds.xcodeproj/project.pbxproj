@@ -23,6 +23,7 @@
 		4C7AFDFA21D7BE1200C5426D /* data.json in Resources */ = {isa = PBXBuildFile; fileRef = 4C7AFDF921D7BE1200C5426D /* data.json */; };
 		4C822EF721FE4A6E00B33974 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4C822EF621FE4A6E00B33974 /* Settings.bundle */; };
 		4C822EF921FE4ABB00B33974 /* SettingsBundleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C822EF821FE4ABB00B33974 /* SettingsBundleHelper.swift */; };
+		4CB75450224A83FE00BF047B /* RulesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB7544F224A83FE00BF047B /* RulesVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		4C7AFDF921D7BE1200C5426D /* data.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = data.json; sourceTree = "<group>"; };
 		4C822EF621FE4A6E00B33974 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		4C822EF821FE4ABB00B33974 /* SettingsBundleHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsBundleHelper.swift; sourceTree = "<group>"; };
+		4CB7544F224A83FE00BF047B /* RulesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +78,7 @@
 		4C3BD63921B5C5010038ECB2 /* QuizBuds */ = {
 			isa = PBXGroup;
 			children = (
+				4CB75451224A840800BF047B /* Rules */,
 				4C7AFDFB21D9207600C5426D /* Categories */,
 				4C887D9621FCBFE000FB0DB5 /* Quiz */,
 				4C3BD64C21B5C5350038ECB2 /* Extras */,
@@ -121,6 +124,14 @@
 			path = Quiz;
 			sourceTree = "<group>";
 		};
+		4CB75451224A840800BF047B /* Rules */ = {
+			isa = PBXGroup;
+			children = (
+				4CB7544F224A83FE00BF047B /* RulesVC.swift */,
+			);
+			path = Rules;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -153,6 +164,7 @@
 				TargetAttributes = {
 					4C3BD63621B5C5010038ECB2 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1020;
 					};
 				};
 			};
@@ -198,6 +210,7 @@
 				4C04247521FF86FC00FA1385 /* QuizFlowLayout.swift in Sources */,
 				4C37EE9F21D429C60073F4B8 /* ColumnFlowLayout.swift in Sources */,
 				4C3E318321C6CCA60034D9F8 /* Extensions.swift in Sources */,
+				4CB75450224A83FE00BF047B /* RulesVC.swift in Sources */,
 				4C3BD64E21B5C95A0038ECB2 /* CategoriesVC.swift in Sources */,
 				4C3BD65021B5D0E90038ECB2 /* QuizVC.swift in Sources */,
 				4C3BD63B21B5C5010038ECB2 /* AppDelegate.swift in Sources */,
@@ -345,13 +358,14 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = FQ4T4QU544;
 				INFOPLIST_FILE = QuizBuds/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.NoobLabs.QuizBuds;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -363,13 +377,14 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = FQ4T4QU544;
 				INFOPLIST_FILE = QuizBuds/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.NoobLabs.QuizBuds;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
