@@ -59,6 +59,7 @@ class CategoriesVC: UIViewController, UICollectionViewDelegate, UICollectionView
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCell.identifier, for: indexPath) as! CategoryCell
         cell.populate(withCategory: categories[indexPath.row])
+        cell.layoutSubviews()
         return cell
     }
 

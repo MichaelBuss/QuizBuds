@@ -24,6 +24,8 @@
 		4C822EF721FE4A6E00B33974 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4C822EF621FE4A6E00B33974 /* Settings.bundle */; };
 		4C822EF921FE4ABB00B33974 /* SettingsBundleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C822EF821FE4ABB00B33974 /* SettingsBundleHelper.swift */; };
 		4CB75450224A83FE00BF047B /* RulesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB7544F224A83FE00BF047B /* RulesVC.swift */; };
+		4CB75453224AB28B00BF047B /* QBCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB75452224AB28B00BF047B /* QBCollectionViewController.swift */; };
+		4CB75455224AB66600BF047B /* QBCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB75454224AB66600BF047B /* QBCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +48,8 @@
 		4C822EF621FE4A6E00B33974 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		4C822EF821FE4ABB00B33974 /* SettingsBundleHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsBundleHelper.swift; sourceTree = "<group>"; };
 		4CB7544F224A83FE00BF047B /* RulesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesVC.swift; sourceTree = "<group>"; };
+		4CB75452224AB28B00BF047B /* QBCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBCollectionViewController.swift; sourceTree = "<group>"; };
+		4CB75454224AB66600BF047B /* QBCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +91,8 @@
 				4C822EF821FE4ABB00B33974 /* SettingsBundleHelper.swift */,
 				4C822EF621FE4A6E00B33974 /* Settings.bundle */,
 				4C3BD64121B5C5030038ECB2 /* Assets.xcassets */,
+				4CB75452224AB28B00BF047B /* QBCollectionViewController.swift */,
+				4CB75454224AB66600BF047B /* QBCell.swift */,
 			);
 			path = QuizBuds;
 			sourceTree = "<group>";
@@ -206,9 +212,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				4C04247321FF84AB00FA1385 /* QuizCell.swift in Sources */,
+				4CB75455224AB66600BF047B /* QBCell.swift in Sources */,
 				4C71D87D21B804D500673E01 /* CategoryData.swift in Sources */,
 				4C04247521FF86FC00FA1385 /* QuizFlowLayout.swift in Sources */,
 				4C37EE9F21D429C60073F4B8 /* ColumnFlowLayout.swift in Sources */,
+				4CB75453224AB28B00BF047B /* QBCollectionViewController.swift in Sources */,
 				4C3E318321C6CCA60034D9F8 /* Extensions.swift in Sources */,
 				4CB75450224A83FE00BF047B /* RulesVC.swift in Sources */,
 				4C3BD64E21B5C95A0038ECB2 /* CategoriesVC.swift in Sources */,

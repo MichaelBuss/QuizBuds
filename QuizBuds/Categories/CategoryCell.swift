@@ -8,13 +8,11 @@
 
 import UIKit
 
-class CategoryCell: UICollectionViewCell {
+class CategoryCell: QBCell<Category> {
     
     static let identifier = "categoryCellId"
     let cellPadding: CGFloat = 16
     let cellCornerRadius: CGFloat = 24
-    
-    var category: Category!
     
     let cellView = UIView()
     let cellLabel = UILabel()
@@ -47,7 +45,7 @@ class CategoryCell: UICollectionViewCell {
     
     func setupCellSwitch() {
         cellSwitch.translatesAutoresizingMaskIntoConstraints = false
-        cellSwitch.isOn = category.isActive!
+        cellSwitch.isOn = element.isActive!
         cellSwitch.leftAnchor.constraint(equalTo: self.contentView.leftAnchor, constant: cellPadding).isActive = true
         cellSwitch.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor).isActive = true
         cellSwitch.addTarget(self, action: #selector(switchAction), for: .valueChanged)
@@ -55,11 +53,11 @@ class CategoryCell: UICollectionViewCell {
     
     @objc func switchAction(sender: UISwitch!){
         print("Value of switch changed, now switch is \(sender.isOn)")
-        category.isActive = sender.isOn
+        element.isActive = sender.isOn
     }
     
     func setupCellLabel() {
-        cellLabel.text = category.name ?? "Name not found"
+        cellLabel.text = element.name ?? "Name not found"
 //        print(category.name!)
         cellLabel.font = UIFont.boldSystemFont(ofSize: 50)
         cellLabel.textColor = UIColor(named: "Category Label Color") ?? #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
@@ -82,7 +80,7 @@ class CategoryCell: UICollectionViewCell {
         gradientLayer.frame = self.bounds
         gradientLayer.startPoint = CGPoint(x:0, y:0)
         gradientLayer.endPoint = CGPoint(x:1, y:0)
-        gradientLayer.colors = [category.gradient.color1?.cgColor ?? #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), category.gradient.color2?.cgColor ?? #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)]
+        gradientLayer.colors = [element.gradient.color1?.cgColor ?? #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), element.gradient.color2?.cgColor ?? #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)]
         
         
         // Shadow layer
@@ -93,10 +91,6 @@ class CategoryCell: UICollectionViewCell {
         shadowLayer.shadowOffset = CGSize.init(width: 0, height: 1) //Offsets shadow one point in y direction
         shadowLayer.shadowRadius = 4
         
-    }
-    
-    func populate(withCategory category: Category){
-        self.category = category
     }
     
     required init?(coder aDecoder: NSCoder) {
