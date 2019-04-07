@@ -104,6 +104,7 @@ class QuizVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: QuizCell.identifier, for: indexPath) as! QuizCell
         cell.populate(withCategory: selectedCategories[indexPath.row])
+        cell.layoutSubviews()
         return cell
     }
 }

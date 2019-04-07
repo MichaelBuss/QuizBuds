@@ -18,8 +18,15 @@ class QuizCell: UICollectionViewCell {
     let cellView = UIView()
     let cellLabel = UILabel()
     
+    let gradientLayer = CAGradientLayer()
+    var shadowLayer = CAShapeLayer()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
+        self.layer.insertSublayer(gradientLayer, at: 0)
+        self.layer.insertSublayer(shadowLayer, at: 0)
+
     }
     
     
@@ -53,7 +60,6 @@ class QuizCell: UICollectionViewCell {
         // Smoothly rounded corners
         
         // Gradient layer
-        let gradientLayer = CAGradientLayer()
         
         gradientLayer.mask = cornerRadiusSmoothMask(onLayer: gradientLayer.mask as? CAShapeLayer, withRadius: cellCornerRadius)
         gradientLayer.frame = self.bounds
@@ -62,7 +68,7 @@ class QuizCell: UICollectionViewCell {
         gradientLayer.colors = [category.gradient.color1?.cgColor ?? #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), category.gradient.color2?.cgColor ?? #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)]
         
         // Shadow layer
-        var shadowLayer = CAShapeLayer()
+       
         shadowLayer = cornerRadiusSmoothMask(onLayer: shadowLayer, withRadius: cellCornerRadius)
         
         shadowLayer.shadowColor = UIColor.black.cgColor
