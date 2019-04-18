@@ -12,10 +12,7 @@ class RulesVC: UIViewController {
     
     let textView = UITextView()
     let imageView = UIImageView()
-    
-//    var imageViewHeightConstraint: NSLayoutConstraint?
-    
-    var calculatedImageViewHeight: CGFloat = 0
+    let bottomSpacingView = UIView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,69 +20,42 @@ class RulesVC: UIViewController {
         
         view.addSubview(textView)
         view.addSubview(imageView)
+        view.addSubview(bottomSpacingView)
         
         setupTextView()
         setupImageView()
-        
-        layoutTextView()
-        layoutImageView()
+        setupBottomSpacingView()
         
     }
-    
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-//        self.imageViewHeightConstraint?.constant = view.frame.height/5
-//        self.view.layoutIfNeeded()
-        updateImageViewHeight()
-        self.view.layoutIfNeeded()
-    }
-    
-//    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-//        print("Device Orientation Changed")
-//        updateImageViewHeight()
-//        self.view.layoutIfNeeded()
-//    }
-
     
     func setupTextView() {
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.backgroundColor = .clear
         textView.text = "These are the rules, obey them!"
         textView.textColor = .white
-    }
-    
-    func layoutTextView() {
+        textView.isEditable = false
+        
         textView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         textView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         textView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        textView.bottomAnchor.constraint(equalTo: imageView.topAnchor).isActive = true
     }
     
     func setupImageView() {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         let image = #imageLiteral(resourceName: "People")
         imageView.image = image
-    }
-    
-    func layoutImageView() {
+
         imageView.contentMode = .scaleAspectFit
-        imageView.topAnchor.constraint(equalTo: textView.bottomAnchor).isActive = true
-        
-//        imageViewHeightConstraint = imageView.heightAnchor.constraint(equalToConstant: view.frame.height/5)
-//        imageViewHeightConstraint?.isActive = true
-        updateImageViewHeight()
-//        imageView.heightAnchor.constraint(equalToConstant: calculatedImageViewHeight).isActive = true
-        
-        imageView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 1)
-        
-        
+        imageView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.2).isActive = true
         imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        imageView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -view.frame.height/14).isActive = true
+        imageView.bottomAnchor.constraint(equalTo: bottomSpacingView.topAnchor).isActive = true
     }
     
-    func updateImageViewHeight() {
-        calculatedImageViewHeight = view.frame.height/5
-        print("New imageView height: \(calculatedImageViewHeight)")
-        self.view.layoutIfNeeded()
+    func setupBottomSpacingView() {
+        bottomSpacingView.translatesAutoresizingMaskIntoConstraints = false
+        bottomSpacingView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.1).isActive = true
+        bottomSpacingView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
     
     
