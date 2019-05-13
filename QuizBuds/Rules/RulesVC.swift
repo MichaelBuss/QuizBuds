@@ -9,13 +9,33 @@
 import UIKit
 
 class RulesVC: UIViewController {
-    
+     
     let textView = UITextView()
     let imageView = UIImageView()
     let bottomSpacingView = UIView()
+    
+    let rules = """
+    1: Gather three or more good friends. 👩🏼‍🎤🧕🏾👨🏻‍🎨
+
+    2: A team of two players sit back to back so they can't spy on each other. 👀
+
+    3: A third person reads questions aloud from this dingus. 💬
+
+    4: If a player believs that the question applies more to them than their opponent they raise a hand ✋, take a sip of their drink 🍸, or however else they wish to indicate.
+
+    5: If both players agree (e.g. only one raises a hand or sips) they get to continue and the audience takes a penalty, for example a sip of beer 🍻. If they disagree, they loose a point — once three are lost the next team of players takes their place.
+
+    Have fun! 🎉 And remember that it is alwasy OK to wish to skip a question. Be nice to each other. 🙏
+    Love you, bye! ✨
+    """
+    
+
+    
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.navigationBar.prefersLargeTitles = true
         view.backgroundColor = UIColor(named: "Background")
         
         view.addSubview(textView)
@@ -25,19 +45,33 @@ class RulesVC: UIViewController {
         setupTextView()
         setupImageView()
         setupBottomSpacingView()
-        
+    }
+    
+    func formatRules(toTextStyle textStyle: TextStyle) -> NSAttributedString {
+        let attributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont.systemFont(ofSize: 15),
+            .foregroundColor: UIColor.white,
+        ]
+        let attributedRules = NSAttributedString(string: rules, attributes: attributes)
+        return attributedRules
     }
     
     func setupTextView() {
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.backgroundColor = .clear
-        textView.text = "These are the rules, obey them!"
-        textView.textColor = .white
+        textView.attributedText = formatRules(toTextStyle: .bread)
+        textView.showsVerticalScrollIndicator = true
         textView.isEditable = false
         
-        textView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        textView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        textView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        // Should align with the navigationcontroller text's leading edge
+        textView.textContainerInset.top = 16
+        textView.textContainerInset.bottom = 16
+        textView.textContainerInset.left = 12
+        textView.textContainerInset.right = 12
+        
+        textView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true // Can't be safe area like the others
+        textView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        textView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
         textView.bottomAnchor.constraint(equalTo: imageView.topAnchor).isActive = true
     }
     
@@ -47,16 +81,24 @@ class RulesVC: UIViewController {
         imageView.image = image
 
         imageView.contentMode = .scaleAspectFit
-        imageView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.2).isActive = true
+        imageView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.2).isActive = true
         imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         imageView.bottomAnchor.constraint(equalTo: bottomSpacingView.topAnchor).isActive = true
     }
     
     func setupBottomSpacingView() {
         bottomSpacingView.translatesAutoresizingMaskIntoConstraints = false
-        bottomSpacingView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.1).isActive = true
-        bottomSpacingView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        bottomSpacingView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.05).isActive = true
+        bottomSpacingView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        bottomSpacingView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        bottomSpacingView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
     }
     
+    enum TextStyle {
+        case number
+        case bread
+    }
     
 }
+
+
