@@ -10,7 +10,7 @@ import UIKit
 
 class QuizCell: UICollectionViewCell {
     static let identifier = "quizCellId"
-    let cellPadding: CGFloat = 16
+    static let cellPadding: CGFloat = 16
     let cellCornerRadius: CGFloat = 24
     
     var category: Category!
@@ -51,8 +51,8 @@ class QuizCell: UICollectionViewCell {
         
         cellLabel.translatesAutoresizingMaskIntoConstraints = false
         cellLabel.clipsToBounds = true
-        cellLabel.leftAnchor.constraint(equalTo: self.contentView.leftAnchor, constant: cellPadding).isActive = true
-        cellLabel.rightAnchor.constraint(equalTo: self.contentView.rightAnchor, constant: -cellPadding).isActive = true
+        cellLabel.leftAnchor.constraint(equalTo: self.contentView.leftAnchor, constant: QuizCell.cellPadding).isActive = true
+        cellLabel.rightAnchor.constraint(equalTo: self.contentView.rightAnchor, constant: -QuizCell.cellPadding).isActive = true
         cellLabel.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor).isActive = true
     }
     

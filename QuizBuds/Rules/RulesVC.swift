@@ -9,7 +9,7 @@
 import UIKit
 
 class RulesVC: UIViewController {
-     
+    
     let textView = UITextView()
     let imageView = UIImageView()
     let bottomSpacingView = UIView()
@@ -28,10 +28,6 @@ class RulesVC: UIViewController {
     Have fun! 🎉 And remember that it is alwasy OK to wish to skip a question. Be nice to each other. 🙏
     Love you, bye! ✨
     """
-    
-
-    
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()

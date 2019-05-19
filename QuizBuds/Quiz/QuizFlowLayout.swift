@@ -16,11 +16,11 @@ class QuizFlowLayout: UICollectionViewFlowLayout {
         
         let avaibleWidth = cv.bounds.inset(by: cv.layoutMargins).size.width
         
-        let minColumnWidth = CGFloat(300.0)
+        let minColumnWidth = 0.8 * avaibleWidth //CGFloat(300.0)
         let maxNumColumns = Int(avaibleWidth / minColumnWidth)
-        let cellWidth = (avaibleWidth / CGFloat(maxNumColumns)).rounded(.down)
-        
-        self.itemSize = CGSize(width: cellWidth, height: 500.0)
+        let cellWidth = ((avaibleWidth - 70) / CGFloat(maxNumColumns)).rounded(.down)
+        let cellHeight = (cv.frame.height-350).rounded(.down)
+        self.itemSize = CGSize(width: cellWidth, height: cellHeight)
         self.scrollDirection = .horizontal
         
         self.sectionInset = UIEdgeInsets(

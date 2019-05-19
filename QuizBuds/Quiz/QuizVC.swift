@@ -13,49 +13,16 @@ class QuizVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     private var quizCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout.init()) // CollectionView
     
     var selectedCategories: [Category] = []
-    let questionLabel = UILabel()
     var currentQuestionIndex = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(named: "Background")
+//        view.translatesAutoresizingMaskIntoConstraints = false
         selectedCategories.shuffle()
         setupNavigationBar()
         setupQuizCollectionView()
         //setupQuestionLabel()
-    }
-    
-    
-    func setupQuestionLabel(){
-        questionLabel.text = selectedCategories.first?.name ?? "No questions found"
-    
-        view.addSubview(questionLabel)
-        
-        questionLabel.translatesAutoresizingMaskIntoConstraints = false
-        questionLabel.clipsToBounds = true
-        questionLabel.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
-        questionLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-    }
-    
-    func changeCurrentQuestionIndex(inDirection direction: direction){
-        switch direction {
-        case .increment:
-            if currentQuestionIndex < selectedCategories.count-1{
-                currentQuestionIndex += 1
-            }
-        case .decrement:
-            if currentQuestionIndex > 1{
-                currentQuestionIndex -= 1
-            }
-        }
-    }
-    
-    func updateQuestionLabel(){
-        if !selectedCategories.isEmpty{
-            questionLabel.text = selectedCategories[currentQuestionIndex].name
-        } else {
-            questionLabel.text = "No more questions here"
-        }
     }
     
     //MARK: Setup Navigation Bar
@@ -69,27 +36,65 @@ class QuizVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     @objc func nextQuestionButtonTapped() {
-        print("Next Question Button Tapped")
-        changeCurrentQuestionIndex(inDirection: .increment)
-        updateQuestionLabel()
+        scroll(toIndex: quizCollectionView.indexPathsForVisibleItems.last!.row)
     }
     
     @objc func previousQuestionButtonTapped() {
         print("Prevoius Question Button Tapped")
-        changeCurrentQuestionIndex(inDirection: .decrement)
-        updateQuestionLabel()
+//        let currentIndex = quizCollectionView.indexPathsForVisibleItems.first
+//        let nextIndex = quizCollectionView.indexPathsForVisibleItems.index(before: currentIndex!.row)
+        
+        scroll(toIndex: quizCollectionView.indexPathsForVisibleItems.first!.row)
+    }
+    
+    func  scroll(toIndex index: Int) { // Not currently in use
+        let indexPath = IndexPath(item: index, section: 0)
+        quizCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+    }
+    
+    func scrollCell(inDirection direction: direction){
+        let cellSize = view.frame.size
+        let contentOffset = quizCollectionView.contentOffset
+        var r = CGRect(x: 0, y: 0, width: 0, height: 0)
+        if hasReachedEnd(of: quizCollectionView, with: cellSize) {
+            r = CGRect(x: 0, y: contentOffset.y, width: cellSize.width, height: cellSize.height)
+        } else {
+            switch (direction) {
+            case .next: r = CGRect(x: contentOffset.x + cellSize.width, y: contentOffset.y, width: cellSize.width, height: cellSize.height)
+            case .previous: r = CGRect(x: contentOffset.x - cellSize.width, y: contentOffset.y, width: cellSize.width, height: cellSize.height)
+            }
+            
+        }
+        quizCollectionView.scrollRectToVisible(r, animated: true)
+    }
+    
+    func hasReachedEnd(of collectionView: UICollectionView, with cellSize: CGSize) -> Bool {
+        if collectionView.contentSize.width <= collectionView.contentOffset.x + cellSize.width {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    enum direction {
+        case next
+        case previous
     }
     
     //MARK: Collection View
     func setupQuizCollectionView() {
         let flowLayout = QuizFlowLayout()
-        quizCollectionView = UICollectionView(frame: view.bounds, collectionViewLayout: flowLayout) // CollectionView
+        //let flowLayout = AltFlowLayout()
+        quizCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        quizCollectionView = UICollectionView(frame: view.safeAreaLayoutGuide.layoutFrame, collectionViewLayout: flowLayout)
         flowLayout.scrollDirection = UICollectionView.ScrollDirection.vertical
+        flowLayout.minimumLineSpacing = QuizCell.cellPadding
         quizCollectionView.setCollectionViewLayout(flowLayout, animated: true)
         quizCollectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         quizCollectionView.backgroundColor = .clear
         view.addSubview(quizCollectionView)
-        
+        quizCollectionView.isPagingEnabled = true
+    
         quizCollectionView.register(QuizCell.self, forCellWithReuseIdentifier: QuizCell.identifier)
         
         quizCollectionView.delegate = self
@@ -109,8 +114,13 @@ class QuizVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     }
 }
 
-
-enum direction {
-    case increment
-    case decrement
-}
+//extension QuizVC: UIScrollViewDelegate {
+//    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+//        let layout = self.quizCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
+//        let cellWidthIncludingSpacing = layout.itemSize.width + layout.minimumLineSpacing
+//        var offset = targetContentOffset.pointee
+//        let index = ((offset.x + scrollView.contentInset.left) / cellWidthIncludingSpacing).rounded()
+//        offset = CGPoint(x: index * cellWidthIncludingSpacing - scrollView.contentInset.left, y: -scrollView.contentInset.top)
+//        targetContentOffset.pointee = offset
+//    }
+//}
