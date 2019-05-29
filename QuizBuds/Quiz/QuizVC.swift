@@ -8,98 +8,105 @@
 
 import UIKit
 
-class QuizVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class QuizVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
-    private var quizCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout.init()) // CollectionView
+    var pagesIndices = 0..<1 // Initiated with wrong size because it can't be empty?
     
-    var selectedCategories: [Category] = []
-    var currentQuestionIndex = 0
+    var cIndex = 0 {
+        didSet {
+            switch cIndex {
+            case pagesIndices.min(): navigationItem.rightBarButtonItems?.last?.isEnabled = false
+            case pagesIndices.max(): navigationItem.rightBarButtonItems?.first?.isEnabled = false
+            default:
+                navigationItem.rightBarButtonItems?.first?.isEnabled = true
+                navigationItem.rightBarButtonItems?.last?.isEnabled = true
+            }
+        }
+    }
+    
+    private var quizCollectionView = UICollectionView(frame: .zero, collectionViewLayout: AltFlowLayout.init()) // CollectionView init
+    
+    var centerFlowLayout: AltFlowLayout {
+        return quizCollectionView.collectionViewLayout as! AltFlowLayout
+    }
+    
+    var selectedCategories: [Category] = [] // Array of categories
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(named: "Background")
-//        view.translatesAutoresizingMaskIntoConstraints = false
         selectedCategories.shuffle()
         setupNavigationBar()
+        setupFlowLayout()
         setupQuizCollectionView()
+        updateCurrentIndex()
         //setupQuestionLabel()
     }
     
-    //MARK: Setup Navigation Bar
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) { // When device is rotated
+        super.viewWillTransition(to: size, with: coordinator)
+        coordinator.animate(alongsideTransition: nil, completion: {
+            _ in
+            // Code that animates:
+            self.centerFlowLayout.itemSize = CGSize(
+                width: size.width * 0.8,
+                height:  size.height * 0.6
+            )
+            self.centerFlowLayout.minimumLineSpacing = QuizCell.cellPadding
+        })
+    }
+    
+    //MARK: - Setup Navigation Bar
     func setupNavigationBar() {
         navigationItem.largeTitleDisplayMode = .never
-        
         let nextQuestionButton = UIBarButtonItem(image: UIImage(named: "NextQuestion"), style: .plain, target: self, action: #selector(nextQuestionButtonTapped))
         let previousQuestionButton = UIBarButtonItem(image: UIImage(named: "PreviousQuestion"), style: .plain, target: self, action: #selector(previousQuestionButtonTapped))
-        
         navigationItem.rightBarButtonItems = [nextQuestionButton, previousQuestionButton]
     }
     
+    //MARK: - Buttons
     @objc func nextQuestionButtonTapped() {
-        scroll(toIndex: quizCollectionView.indexPathsForVisibleItems.last!.row)
+        print("Next Question Button Tapped")
+        scrollPages(amount: 1)
     }
     
     @objc func previousQuestionButtonTapped() {
         print("Prevoius Question Button Tapped")
-//        let currentIndex = quizCollectionView.indexPathsForVisibleItems.first
-//        let nextIndex = quizCollectionView.indexPathsForVisibleItems.index(before: currentIndex!.row)
-        
-        scroll(toIndex: quizCollectionView.indexPathsForVisibleItems.first!.row)
+        scrollPages(amount: -1)
     }
     
-    func  scroll(toIndex index: Int) { // Not currently in use
-        let indexPath = IndexPath(item: index, section: 0)
-        quizCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
-    }
-    
-    func scrollCell(inDirection direction: direction){
-        let cellSize = view.frame.size
-        let contentOffset = quizCollectionView.contentOffset
-        var r = CGRect(x: 0, y: 0, width: 0, height: 0)
-        if hasReachedEnd(of: quizCollectionView, with: cellSize) {
-            r = CGRect(x: 0, y: contentOffset.y, width: cellSize.width, height: cellSize.height)
-        } else {
-            switch (direction) {
-            case .next: r = CGRect(x: contentOffset.x + cellSize.width, y: contentOffset.y, width: cellSize.width, height: cellSize.height)
-            case .previous: r = CGRect(x: contentOffset.x - cellSize.width, y: contentOffset.y, width: cellSize.width, height: cellSize.height)
-            }
-            
-        }
-        quizCollectionView.scrollRectToVisible(r, animated: true)
-    }
-    
-    func hasReachedEnd(of collectionView: UICollectionView, with cellSize: CGSize) -> Bool {
-        if collectionView.contentSize.width <= collectionView.contentOffset.x + cellSize.width {
-            return true
-        } else {
-            return false
+    func scrollPages(amount: Int) {
+        guard let currentIndexPath = centerFlowLayout.currentCenteredIndexPath else {return}
+        cIndex = currentIndexPath.row
+        if pagesIndices.contains(cIndex + amount) {
+            centerFlowLayout.scrollToPage(atIndex: cIndex + amount)
         }
     }
     
-    enum direction {
-        case next
-        case previous
+    func setupFlowLayout() {
+        centerFlowLayout.itemSize = CGSize(
+            width: view.bounds.width * 0.8,
+            height:  view.bounds.height * 0.6
+        )
+        centerFlowLayout.animationMode = AltFlowLayoutAnimation.scale(sideItemScale: 0.6, sideItemAlpha: 0.6, sideItemShift: 0.0)
+        centerFlowLayout.scrollDirection = .horizontal
     }
     
     //MARK: Collection View
     func setupQuizCollectionView() {
-        let flowLayout = QuizFlowLayout()
-        //let flowLayout = AltFlowLayout()
         quizCollectionView.translatesAutoresizingMaskIntoConstraints = false
-        quizCollectionView = UICollectionView(frame: view.safeAreaLayoutGuide.layoutFrame, collectionViewLayout: flowLayout)
-        flowLayout.scrollDirection = UICollectionView.ScrollDirection.vertical
-        flowLayout.minimumLineSpacing = QuizCell.cellPadding
-        quizCollectionView.setCollectionViewLayout(flowLayout, animated: true)
+        quizCollectionView = UICollectionView(frame: view.bounds, collectionViewLayout: centerFlowLayout)
         quizCollectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        centerFlowLayout.minimumLineSpacing = QuizCell.cellPadding
         quizCollectionView.backgroundColor = .clear
         view.addSubview(quizCollectionView)
-        quizCollectionView.isPagingEnabled = true
-    
+        
         quizCollectionView.register(QuizCell.self, forCellWithReuseIdentifier: QuizCell.identifier)
         
         quizCollectionView.delegate = self
         quizCollectionView.dataSource = self
         
+        pagesIndices = 0..<quizCollectionView.numberOfItems(inSection: 0)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -112,15 +119,20 @@ class QuizVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         cell.layoutSubviews()
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let cIndexPath = centerFlowLayout.currentCenteredIndexPath, cIndexPath != indexPath {
+            centerFlowLayout.scrollToPage(atIndex: indexPath.row)
+        }
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        updateCurrentIndex()
+    }
+    
+    func updateCurrentIndex(){
+        guard let index = centerFlowLayout.currentCenteredIndexPath?.row else {fatalError("could not find currently centered page index")}
+        print("Index changed to \(index)")
+        cIndex = index
+    }
 }
-
-//extension QuizVC: UIScrollViewDelegate {
-//    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-//        let layout = self.quizCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
-//        let cellWidthIncludingSpacing = layout.itemSize.width + layout.minimumLineSpacing
-//        var offset = targetContentOffset.pointee
-//        let index = ((offset.x + scrollView.contentInset.left) / cellWidthIncludingSpacing).rounded()
-//        offset = CGPoint(x: index * cellWidthIncludingSpacing - scrollView.contentInset.left, y: -scrollView.contentInset.top)
-//        targetContentOffset.pointee = offset
-//    }
-//}

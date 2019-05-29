@@ -72,13 +72,16 @@ class CategoriesVC: UIViewController, UICollectionViewDelegate, UICollectionView
         self.navigationController?.navigationBar.prefersLargeTitles = true
         
         // Buttons
-        let settingsButton = UIBarButtonItem(image: UIImage(named: "Settings"), style: .plain, target: self, action: #selector(settingsButtonTapped))
-        let editButton = UIBarButtonItem(image: UIImage(named: "Edit"), style: .plain, target: self, action: #selector(editButtonTapped))
+        //let settingsButton = UIBarButtonItem(image: UIImage(named: "Settings"), style: .plain, target: self, action: #selector(settingsButtonTapped))
+        //let editButton = UIBarButtonItem(image: UIImage(named: "Edit"), style: .plain, target: self, action: #selector(editButtonTapped))
         let helpButton = UIBarButtonItem(image: UIImage(named: "Help"), style: .plain, target: self, action: #selector(helpButtonTapped))
         let playButton = UIBarButtonItem(image: UIImage(named: "Play"), style: .plain, target: self, action: #selector(playButtonTapped))
 
-        navigationItem.leftBarButtonItems = [settingsButton, editButton]
-        navigationItem.rightBarButtonItems = [playButton, helpButton]
+        //navigationItem.leftBarButtonItems = [settingsButton, editButton]
+        //navigationItem.rightBarButtonItems = [playButton, helpButton]
+        navigationItem.leftBarButtonItems = [helpButton]
+        navigationItem.rightBarButtonItems = [playButton]
+        
     }
     
     @objc func settingsButtonTapped() {

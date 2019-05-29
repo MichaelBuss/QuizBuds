@@ -7,8 +7,6 @@
 //
 
 import Foundation
-
-import Foundation
 import UIKit
 
 
@@ -18,7 +16,6 @@ enum AltFlowLayoutSpacingMode {
 }
 
 enum AltFlowLayoutAnimation {
-    case rotation(sideItemAngle: CGFloat, sideItemAlpha: CGFloat, sideItemShift: CGFloat)
     case scale(sideItemScale: CGFloat, sideItemAlpha: CGFloat, sideItemShift: CGFloat)
 }
 
@@ -33,7 +30,7 @@ class AltFlowLayout: UICollectionViewFlowLayout {
         }
     }
     fileprivate var state = LayoutState(size: CGSize.zero, direction: .horizontal)
-    var spacingMode = AltFlowLayoutSpacingMode.fixed(spacing: 0)
+    var spacingMode = AltFlowLayoutSpacingMode.fixed(spacing: QuizCell.cellPadding)
     var animationMode = AltFlowLayoutAnimation.scale(sideItemScale: 0.7, sideItemAlpha: 0.6, sideItemShift: 0.0)
     fileprivate var pageWidth: CGFloat {
         switch self.scrollDirection {
@@ -41,6 +38,8 @@ class AltFlowLayout: UICollectionViewFlowLayout {
             return self.itemSize.width + self.minimumLineSpacing
         case .vertical:
             return self.itemSize.height + self.minimumLineSpacing
+        @unknown default:
+            fatalError("Neither horizontal nor vertical")
         }
     }
     
@@ -157,9 +156,6 @@ private extension AltFlowLayout {
         case .scale(let sideItemScale, _, _):
             scale = sideItemScale
             break
-            
-        default:
-            break
         }
         let scaledItemOffset =  (side - side * scale) / 2
         
@@ -187,21 +183,9 @@ private extension AltFlowLayout {
         let distance = min(abs(collectionCenter - normalizedCenter), maxDistance)
         let ratio = (maxDistance - distance)/maxDistance
         var sideItemShift: CGFloat = 0.0
+        
+        
         switch animationMode {
-        case .rotation(let sideItemAngle, let sideItemAlpha, let shift):
-            sideItemShift = shift
-            let alpha = ratio * (1 - sideItemAlpha) + sideItemAlpha
-            attributes.alpha = alpha
-            var offsetX =  (collectionCenter + offset) - (normalizedCenter + offset)
-            if offsetX < 0 {
-                offsetX *= -1
-            }
-            if offsetX > 0 {
-                let offsetPercentage = offsetX / (collectionCenter * 2)
-                let rotation = (1 - offsetPercentage) - sideItemAngle
-                attributes.transform = CGAffineTransform(rotationAngle: rotation)
-            }
-            break
         case .scale(let sideItemScale, let sideItemAlpha, let shift):
             sideItemShift = shift
             
@@ -213,6 +197,9 @@ private extension AltFlowLayout {
             
             break
         }
+        
+        
+        
         let shift = (1 - ratio) * sideItemShift
         
         if isHorizontal {

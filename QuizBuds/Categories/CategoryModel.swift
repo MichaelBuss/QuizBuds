@@ -15,7 +15,7 @@ struct Category {
         get { return UserDefaults.standard.object(forKey: name!) as? Bool }
     }
     var gradient: Gradient
-//    var questions: [String?]
+    var questions: [String?]
 }
 
 extension Category: Decodable {
@@ -23,7 +23,7 @@ extension Category: Decodable {
         case name
         case isActive
         case gradient
-//        case questions
+        case questions
     }
     
     init(from decoder: Decoder) throws {
@@ -31,7 +31,7 @@ extension Category: Decodable {
         
         name = try container.decode(String.self, forKey: .name)
         gradient = try container.decode(Gradient.self, forKey: .gradient)
-//        questions = try container.decode([String].self, forKey: .name)
+        questions = try container.decode([String].self, forKey: .questions)
         
         let storedIsActive = UserDefaults.standard.object(forKey: name!) as! Bool?
         let decoded = try container.decode(Bool.self, forKey: .isActive)
