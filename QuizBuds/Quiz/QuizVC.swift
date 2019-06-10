@@ -30,7 +30,12 @@ class QuizVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         return quizCollectionView.collectionViewLayout as! AltFlowLayout
     }
     
-    var selectedCategories: [Category] = [] // Array of categories
+    var selectedCategories: [Category] = [] {
+        didSet {
+            makeQuestinosArray()
+        }
+    }
+    var questions: [Question] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +45,6 @@ class QuizVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         setupFlowLayout()
         setupQuizCollectionView()
         updateCurrentIndex()
-        //setupQuestionLabel()
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) { // When device is rotated
@@ -54,6 +58,14 @@ class QuizVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
             )
             self.centerFlowLayout.minimumLineSpacing = QuizCell.cellPadding
         })
+    }
+    
+    func makeQuestinosArray() {
+        questions = []
+        for index in 0..<selectedCategories.count {
+            questions.append(contentsOf: selectedCategories[index].questions)
+        }
+        questions.shuffle()
     }
     
     //MARK: - Setup Navigation Bar
@@ -92,7 +104,6 @@ class QuizVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         centerFlowLayout.scrollDirection = .horizontal
     }
     
-    //MARK: Collection View
     func setupQuizCollectionView() {
         quizCollectionView.translatesAutoresizingMaskIntoConstraints = false
         quizCollectionView = UICollectionView(frame: view.bounds, collectionViewLayout: centerFlowLayout)
@@ -110,12 +121,12 @@ class QuizVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return selectedCategories.count
+        return questions.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: QuizCell.identifier, for: indexPath) as! QuizCell
-        cell.populate(withCategory: selectedCategories[indexPath.row])
+        cell.question = questions[indexPath.row]
         cell.layoutSubviews()
         return cell
     }

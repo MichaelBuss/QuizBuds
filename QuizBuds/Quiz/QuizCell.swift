@@ -13,7 +13,14 @@ class QuizCell: UICollectionViewCell {
     static let cellPadding: CGFloat = 16
     let cellCornerRadius: CGFloat = 24
     
-    var category: Category!
+    var question: Question! {
+        didSet{
+            layoutSubviews()
+            setupCellView()
+            setupCellLabel()
+        }
+    }
+    var questionIndex: Int!
     
     let cellView = UIView()
     let textView = UILabel()
@@ -34,14 +41,11 @@ class QuizCell: UICollectionViewCell {
         
         self.contentView.addSubview(cellView)
         self.contentView.addSubview(textView)
-        
-        setupCellView()
-        setupCellLabel()
     }
     
     func setupCellLabel() {
         // Properties
-        textView.text = category.questions[0] ?? "Question not found"
+        textView.text = question.question ?? "Question not found"
         textView.backgroundColor = .clear
         textView.font = UIFont.boldSystemFont(ofSize: 30)
         textView.textColor = UIColor(named: "Category Label Color") ?? #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
@@ -63,7 +67,7 @@ class QuizCell: UICollectionViewCell {
         gradientLayer.frame = self.bounds
         gradientLayer.startPoint = CGPoint(x:0, y:0)
         gradientLayer.endPoint = CGPoint(x:1, y:0)
-        gradientLayer.colors = [category.gradient.color1?.cgColor ?? #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), category.gradient.color2?.cgColor ?? #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)]
+        gradientLayer.colors = [question.category.gradient.color1?.cgColor ?? #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), question.category.gradient.color2?.cgColor ?? #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)]
         
         // Shadow layer
         shadowLayer = cornerRadiusSmoothMask(onLayer: shadowLayer, withRadius: cellCornerRadius)
@@ -75,10 +79,6 @@ class QuizCell: UICollectionViewCell {
         // Insert layers
         shadowLayer.insertSublayer(gradientLayer, at: 0)
         self.layer.insertSublayer(shadowLayer, at: 0)
-    }
-    
-    func populate(withCategory category: Category){
-        self.category = category
     }
     
     required init?(coder aDecoder: NSCoder) {

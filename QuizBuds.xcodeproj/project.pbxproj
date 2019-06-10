@@ -21,7 +21,6 @@
 		4C71D87B21B803FA00673E01 /* CategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C71D87A21B803FA00673E01 /* CategoryModel.swift */; };
 		4C71D87D21B804D500673E01 /* CategoryData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C71D87C21B804D500673E01 /* CategoryData.swift */; };
 		4C7AFDF821D7B42600C5426D /* Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7AFDF721D7B42600C5426D /* Gradient.swift */; };
-		4C7AFDFA21D7BE1200C5426D /* dataOLD.json in Resources */ = {isa = PBXBuildFile; fileRef = 4C7AFDF921D7BE1200C5426D /* dataOLD.json */; };
 		4C822EF721FE4A6E00B33974 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4C822EF621FE4A6E00B33974 /* Settings.bundle */; };
 		4C822EF921FE4ABB00B33974 /* SettingsBundleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C822EF821FE4ABB00B33974 /* SettingsBundleHelper.swift */; };
 		4CB75450224A83FE00BF047B /* RulesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB7544F224A83FE00BF047B /* RulesVC.swift */; };
@@ -45,7 +44,6 @@
 		4C71D87A21B803FA00673E01 /* CategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModel.swift; sourceTree = "<group>"; };
 		4C71D87C21B804D500673E01 /* CategoryData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryData.swift; sourceTree = "<group>"; };
 		4C7AFDF721D7B42600C5426D /* Gradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gradient.swift; sourceTree = "<group>"; };
-		4C7AFDF921D7BE1200C5426D /* dataOLD.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = dataOLD.json; sourceTree = "<group>"; };
 		4C822EF621FE4A6E00B33974 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		4C822EF821FE4ABB00B33974 /* SettingsBundleHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsBundleHelper.swift; sourceTree = "<group>"; };
 		4CB7544F224A83FE00BF047B /* RulesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesVC.swift; sourceTree = "<group>"; };
@@ -86,7 +84,6 @@
 				4C7AFDFB21D9207600C5426D /* Categories */,
 				4C887D9621FCBFE000FB0DB5 /* Quiz */,
 				4C3BD64C21B5C5350038ECB2 /* Extras */,
-				4C7AFDF921D7BE1200C5426D /* dataOLD.json */,
 				4C463C63229DC43100212AFC /* data.json */,
 				4C3BD64621B5C5030038ECB2 /* Info.plist */,
 				4C822EF821FE4ABB00B33974 /* SettingsBundleHelper.swift */,
@@ -199,7 +196,6 @@
 			files = (
 				4C822EF721FE4A6E00B33974 /* Settings.bundle in Resources */,
 				4C3BD64521B5C5030038ECB2 /* LaunchScreen.storyboard in Resources */,
-				4C7AFDFA21D7BE1200C5426D /* dataOLD.json in Resources */,
 				4C463C64229DC43100212AFC /* data.json in Resources */,
 				4C3BD64221B5C5030038ECB2 /* Assets.xcassets in Resources */,
 			);
@@ -366,7 +362,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = FQ4T4QU544;
 				INFOPLIST_FILE = QuizBuds/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -385,7 +381,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = FQ4T4QU544;
 				INFOPLIST_FILE = QuizBuds/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
