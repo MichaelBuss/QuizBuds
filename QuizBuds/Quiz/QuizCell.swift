@@ -18,12 +18,14 @@ class QuizCell: UICollectionViewCell {
             layoutSubviews()
             setupCellView()
             setupCellLabel()
+            setupCategoryLabel()
         }
     }
     var questionIndex: Int!
     
     let cellView = UIView()
     let textView = UILabel()
+    let categoryLabel = UILabel()
     
     let gradientLayer = CAGradientLayer()
     var shadowLayer = CAShapeLayer()
@@ -41,6 +43,24 @@ class QuizCell: UICollectionViewCell {
         
         self.contentView.addSubview(cellView)
         self.contentView.addSubview(textView)
+        self.contentView.addSubview(categoryLabel)
+    }
+    
+    func setupCategoryLabel() {
+        // Properties
+        categoryLabel.text = "— \(question.category.name!) —"
+        categoryLabel.font = UIFont.italicSystemFont(ofSize: 15)
+        categoryLabel.textColor = UIColor(named: "Silent Category Label Color") ?? #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        categoryLabel.textAlignment = .center
+        categoryLabel.numberOfLines = 0
+        
+        // Layout
+        categoryLabel.translatesAutoresizingMaskIntoConstraints = false
+        categoryLabel.clipsToBounds = true
+        categoryLabel.leftAnchor.constraint(equalTo: self.contentView.leftAnchor, constant: QuizCell.cellPadding).isActive = true
+        categoryLabel.rightAnchor.constraint(equalTo: self.contentView.rightAnchor, constant: -QuizCell.cellPadding).isActive = true
+        categoryLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: QuizCell.cellPadding).isActive = true
+        categoryLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
     }
     
     func setupCellLabel() {
@@ -48,6 +68,7 @@ class QuizCell: UICollectionViewCell {
         textView.text = question.question ?? "Question not found"
         textView.backgroundColor = .clear
         textView.font = UIFont.boldSystemFont(ofSize: 30)
+        //textView.font = UIFont.preferredFont(forTextStyle: .largeTitle)
         textView.textColor = UIColor(named: "Category Label Color") ?? #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         textView.textAlignment = .center
         textView.numberOfLines = 0

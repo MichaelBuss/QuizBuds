@@ -12,6 +12,8 @@ class QuizVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     
     var pagesIndices = 0..<1 // Initiated with wrong size because it can't be empty?
     
+    let impactFeedbackgenerator = UIImpactFeedbackGenerator(style: .light) 
+    
     var cIndex = 0 {
         didSet {
             switch cIndex {
@@ -92,6 +94,7 @@ class QuizVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         cIndex = currentIndexPath.row
         if pagesIndices.contains(cIndex + amount) {
             centerFlowLayout.scrollToPage(atIndex: cIndex + amount)
+            impactFeedbackgenerator.prepare()
         }
     }
     
@@ -138,11 +141,12 @@ class QuizVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        impactFeedbackgenerator.impactOccurred()
         updateCurrentIndex()
     }
     
     func updateCurrentIndex(){
-        guard let index = centerFlowLayout.currentCenteredIndexPath?.row else {fatalError("could not find currently centered page index")}
+        guard let index = centerFlowLayout.currentCenteredIndexPath?.row else {print("could not find currently centered page index"); return}
         print("Index changed to \(index)")
         cIndex = index
     }

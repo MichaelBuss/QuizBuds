@@ -1,0 +1,141 @@
+[
+    {
+        "name": "Friends",
+        "isActive": true,
+        "gradient": {
+            "color1": "42E695",
+            "color2": "3BB2B8",
+        },
+        "questions": [
+            "Who's more agressive? 🤬",
+            "Who will have kids first? 👶",
+            "Who falls in love the easiest? 💘",
+            "Who cares more about their looks? 💅🏾",
+            "Who has more clothes? 👗",
+            "Who's more obsessed with themselves? 😻",
+            "Who's wastes more life on social media? 🤳",
+            "Who's got the ugliest bank account? 📉",
+            "Who talks more about themselves? 📣",
+            "Who spends more time sun bathing? 🏖",
+            "Who'll have the best behaved children? 🍼",
+            "Who's more spontaneous? 👀",
+            "Who's more cleaver? 🧠",
+            "Who's in worse shape? 🥵",
+            "Who farts the most? 💨",
+            "Who's better at keeping secrets? 🤐"
+        ]
+    },
+    {
+        "name": "Sex",
+        "isActive": false,
+        "gradient": {
+            "color1": "7117EA",
+            "color2": "EA6060",
+        },
+        "questions": [
+            "Who's cheaper? 💵",
+            "Who has been with more partners? 🌪",
+            "Who has had the most one night stants? 🐰",
+            "Who gets laid more? 🍑",
+            "Who needs to get laid more? 🍆",
+            "Who's more kinky? ⛓",
+            "Who's more romantic? 🎻",
+            "Who has the wildest sex life? 👽",
+            "Who has the nastiest sex toys? 🔮",
+            "Who has seen more porn? 🤩",
+            "Who's more likely to watch porn RIGHT NOW? 😳",
+            "Who lost their virginity first? 🦁",
+            "Who jerks off more? ✊💦",
+            "Who's more likely do send nudes? 🧜‍♂️",
+            "Who would join a threesome faster? 🏃‍♂️",
+            "Who gives the best head? 👄",
+            "Who cares more about their partner's looks? 🦚",
+            "Who would be the most expensive prostitude? 🍭",
+            "Who's mentally older? 👴🏻👵🏼"
+        ]
+    },
+    {
+        "name": "Party",
+        "isActive": true,
+        "gradient": {
+            "color1": "17EAD9",
+            "color2": "6078EA",
+        },
+        "questions": [
+            "Who drinks more? 🍷",
+            "Who's the biggest spender when out? 💸",
+            "Who looks better tonight? 🐩",
+            "Who plays more beer pong? 🏓",
+            "Who's more likely to have fallen asleap at a party? 💤",
+            "Who goes out first? 🛌",
+            "Who's more likely to have prepared hangover snacks? 🏥",
+            "Who makes the strongest drinks? 🍸",
+            "Who mixes the best drinks? 🍹",
+            "Who is more likely to empty a bottle of vodka on their own? 🥃",
+            "Who has the worst pick up lines? 💝",
+            "Who kills it more on the dance floor? 🕺",
+            "Who's best at shaking booty? 💃",
+            "Who's most likely to get beaten up by a door man? 🥊",
+            "Who's the most eager to get some tonight? 🎯",
+            "Who would make the best sex tape? 🤫",
+            "Who can empty a beer the fastest? 🍺",
+            "Who is more likely to get drunk on a tuesday? 🥴",
+            "Who's done more drugs? 💊"
+        ]
+    },
+    {
+        "name": "School",
+        "isActive": true,
+        "gradient": {
+            "color1": "FCE38A",
+            "color2": "F38181",
+        },
+        "questions": [
+            "Who spends more time at the coffe machine than doing their work? ☕️",
+            "Who snatches the biggest piece of cake? 🍰",
+            "Who works the hardest? 👩‍🚒",
+            "Who's most often absent from illness? 🤧",
+            "Who needs a bigger lunch tray? 🍱",
+            "Who's got the nicest desk? 🖥",
+            "Who's more likely to show up with still drunk? 🥴",
+            "Who never does their homework? 📖",
+            "Who checks social media more during work time? 👤",
+            "Who will end up making the most money? 💰"
+        ]
+    },
+    {
+        "name": "Food",
+        "isActive": true,
+        "gradient": {
+            "color1": "5B247A",
+            "color2": "1BCEDF",
+        },
+        "questions": [
+            "Who makes the nastiest food? 🥫",
+            "Who eats more junk food? 🍔",
+            "Who's trying to impress with their cooking? 🥘",
+            "Who gets more extra dressing in their durum? 🌯",
+            "Who would be most likely to drink raw cream? 🥛",
+            "Who's more likely to not eat the crust of pizza 🍕",
+            "Who's more likely to enjoy pinapple on a pizza? 🍍",
+            "Who always buys date sensitive food to save moeny? 🌝"
+        ]
+    },
+    {
+        "name": "Family",
+        "isActive": true,
+        "gradient": {
+            "color1": "184E68",
+            "color2": "57CA85",
+        },
+        "questions": [
+            "Who's father would win a fight? 👨🏼‍🦰",
+            "Who's got the coolest mom? 🦸🏻‍♀️",
+            "Who was the nicest behaving child?? 👼",
+            "Who got all the smart genes? 🦉",
+            "Who hides the most secrets from their parents? 🤫",
+            "Who's broken the most windows? 😬",
+            "Who had the most toys? 🧸"
+        ]
+    }
+]
