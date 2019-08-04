@@ -28,10 +28,17 @@ class RulesVC: UIViewController {
     Have fun! 🎉 And remember that it is alwasy OK to wish to skip a question. Be nice to each other. 🙏
     Love you, bye! ✨
     """
+    
+    let privacyPolicy = """
+    QuizBuds never collects any of your personal information. It never stores or transfers any information to the developer or any third party.
+
+    No trackers, no ads, no nothing. Just a nice little app for your enjoyment. Made solely for practicing app building. 👨‍💻
+    """
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.navigationBar.prefersLargeTitles = true
+        setupNavigationBar()
+        
         view.backgroundColor = UIColor(named: "Background")
         
         view.addSubview(textView)
@@ -93,6 +100,31 @@ class RulesVC: UIViewController {
     enum TextStyle {
         case number
         case bread
+    }
+    
+    //MARK: - Setup Navigation Bar
+    var toggleTextButton = UIBarButtonItem()
+    func setupNavigationBar() {
+        toggleTextButton = UIBarButtonItem(title: "Privacy", style: .plain, target: self, action: #selector(toggleTextTapped))
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.largeTitleDisplayMode = .never
+        navigationItem.rightBarButtonItems = [toggleTextButton]
+    }
+    
+    //MARK: - Buttons
+    @objc func toggleTextTapped() {
+        print("Toggeling Privacy/Rules")
+        
+        switch textView.text {
+        case rules:
+            toggleTextButton.title = "Rules"
+            textView.text = privacyPolicy
+        case privacyPolicy:
+            toggleTextButton.title = "Privacy"
+            textView.text = rules
+        default:
+            fatalError()
+        }
     }
     
 }
